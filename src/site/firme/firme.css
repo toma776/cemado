@@ -1,0 +1,49 @@
+/* Pagina „Pentru firme”: hero grafit (ton mai sobru, B2B) cu formularul alături; restul folosește clasele homepage-ului */
+html { scroll-padding-top: 96px; }
+.f-hero { background: var(--graphite); color: var(--on-dark); }
+.f-hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 480px); gap: 64px; align-items: start; padding-top: 80px; padding-bottom: 88px; }
+.f-hero .s-eyebrow { color: #FF9AA0; }
+.f-hero h1 { font: 800 clamp(34px, 4.4vw, 54px)/1.06 var(--display); letter-spacing: -.025em; margin: 0 0 22px; color: #fff; }
+.f-hero-lead { font-size: 18.5px; color: var(--on-dark-muted); margin: 0 0 36px; max-width: 560px; }
+.f-proof { list-style: none; margin: 0 0 36px; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line-dark); max-width: 560px; }
+.f-proof li { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-dark); }
+.f-proof b { font: 800 15px var(--display); color: #FF9AA0; }
+.f-proof span { color: #fff; font-size: 15px; }
+.f-call { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; font: 800 22px var(--display); }
+.f-call small { display: block; font: 500 13px var(--text); color: var(--on-dark-muted); }
+
+.f-form { background: #fff; color: var(--ink); border-radius: 24px; padding: 32px; display: grid; gap: 14px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6); }
+.f-form h2 { font: 800 25px/1.15 var(--display); letter-spacing: -.015em; margin: 0; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.f-checks { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.f-checks legend { font-size: 14px; font-weight: 600; margin-bottom: 8px; padding: 0; }
+.f-checks label { position: relative; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border: 1.5px solid #D9D3CC; border-radius: 12px; font-size: 14px; font-weight: 500; line-height: 1.25; cursor: pointer; }
+.f-checks label input { position: absolute; opacity: 0; pointer-events: none; }
+.f-checks label.on { border-color: var(--ink); background: var(--sand); }
+.f-checks label:has(input:focus-visible) { outline: 2px solid var(--red); outline-offset: 2px; }
+.f-box { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid #C9C2BA; color: transparent; flex: none; }
+.f-checks label.on .f-box { background: var(--red); border-color: var(--red); color: #fff; }
+.f-checks.has-err label { border-color: var(--red); }
+.f-checks .s-err { grid-column: 1 / -1; }
+.f-done { justify-items: start; }
+.f-done h3 { font: 800 22px/1.2 var(--display); margin: 0; }
+.f-done p { margin: 0; }
+
+.f-li { display: flex; gap: 8px; align-items: center; padding: 5px 0; font-size: 15px; color: var(--ink-2); }
+.f-li svg { color: var(--red); flex: none; }
+.f-values { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.f-segments { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.f-segments > div { border-top: 2px solid var(--red); padding-top: 20px; }
+.f-segments h3 { font: 800 20px/1.2 var(--display); margin: 0 0 8px; }
+.f-segments p { margin: 0; color: var(--muted); font-size: 15px; }
+
+@media (max-width: 1140px) {
+  .f-hero-in { grid-template-columns: 1fr; gap: 40px; }
+  .f-values, .f-segments { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .f-hero-in { padding-top: 44px; padding-bottom: 56px; }
+  .f-form { padding: 24px 18px; }
+  .f-row, .f-checks, .f-values, .f-segments { grid-template-columns: 1fr; }
+  .f-proof li { grid-template-columns: 100px minmax(0, 1fr); }
+}

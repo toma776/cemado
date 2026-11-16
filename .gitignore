@@ -1,0 +1,7 @@
+# Documente interne client (repo public)
+*.docx
+*.pdf
+
+# OS
+Thumbs.db
+.DS_Store

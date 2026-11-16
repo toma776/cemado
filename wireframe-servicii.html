@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CEMADO Service Wireframes</title>
+<style>
+:root{
+  --bg:#f4f4f2; --paper:#ffffff; --ink:#1d1d1b; --mute:#6b6b66; --line:#c9c9c4; --fill:#e4e4e0; --fill2:#d6d6d1;
+  --accent:#c8102e; --note:#fff6c9; --noteInk:#5a4a00;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.toggle{position:sticky;top:0;z-index:50;background:#1d1d1b;color:#fff;padding:8px 16px;display:flex;gap:12px 20px;align-items:center;font-size:13px;flex-wrap:wrap}
+.toggle label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.tabs{display:flex;gap:4px;flex-wrap:wrap}
+.tabs button{background:#333;color:#ddd;border:0;padding:6px 12px;border-radius:4px;font:inherit;cursor:pointer}
+.tabs button[aria-selected=true]{background:var(--accent);color:#fff}
+body.hide-notes .note{display:none}
+.view{display:none}.view.on{display:block}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.page{background:var(--paper);max-width:1212px;margin:24px auto;border:1px solid var(--line)}
+section{padding:44px 0;border-bottom:1px dashed var(--line);position:relative}
+.tag{position:absolute;top:8px;left:16px;font:600 11px/1 ui-monospace,Consolas,monospace;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.note{background:var(--note);color:var(--noteInk);border-left:3px solid #e0b800;padding:8px 12px;font-size:13px;margin:16px 0 0;border-radius:2px}
+.img{background:var(--fill);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mute);font:12px ui-monospace,Consolas,monospace;text-align:center;padding:8px;position:relative;overflow:hidden;min-height:60px}
+.img::before,.img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px))}
+.img::after{background:linear-gradient(to top left,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px))}
+.img span{position:relative;z-index:1;background:var(--fill);padding:2px 6px}
+.btn{display:inline-block;padding:12px 20px;border:2px solid var(--ink);font-weight:600;font-size:14px;border-radius:4px;background:var(--paper);color:var(--ink);text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.sm{padding:8px 14px;font-size:13px}
+h1{font-size:clamp(26px,3.6vw,40px);line-height:1.15;margin:0 0 14px}
+h2{font-size:clamp(21px,2.4vw,28px);line-height:1.2;margin:0 0 8px}
+h3{font-size:17px;margin:0 0 6px}
+p{margin:0 0 12px}
+.lead{font-size:17px;color:var(--mute);max-width:58ch}
+.muted{color:var(--mute)}
+.eyebrow{font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:12px;color:var(--mute);margin-bottom:8px}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:1.1fr .9fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);border-radius:6px;padding:20px;background:var(--paper);display:flex;flex-direction:column;gap:6px}
+.icon{width:36px;height:36px;border-radius:8px;background:var(--fill2)}
+.link{font-weight:600;font-size:14px;margin-top:auto}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--mute)}
+.crumbs{font-size:12px;color:var(--mute);padding:12px 0 0}
+/* mini header */
+header{padding:14px 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{width:130px;height:38px;min-height:0}
+.navs{font-size:13px;color:var(--mute)}
+/* hero with form */
+.hero .g2{align-items:start}
+.formbox{border:2px solid var(--ink);border-radius:8px;padding:20px;background:var(--paper)}
+.formbox h3{margin-bottom:12px}
+.f{border:1px solid var(--line);border-radius:4px;padding:11px 12px;font-size:13px;color:var(--mute);margin-bottom:10px;background:#fafaf8}
+.f.sel::after{content:" ▾";float:right}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.radio{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.radio span{border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:13px}
+.radio span.on{border-color:var(--ink);font-weight:600}
+.gdpr{font-size:11px;color:var(--mute);margin:8px 0 12px}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-size:13px;color:var(--mute)}
+.trust b{color:var(--ink)}
+/* steps */
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
+.step{border-top:3px solid var(--ink);padding-top:14px}
+.step::before{counter-increment:s;content:counter(s);font-size:28px;font-weight:700;display:block;margin-bottom:4px}
+/* faq */
+.faq div{border-bottom:1px solid var(--line);padding:14px 0;display:flex;justify-content:space-between;gap:16px;font-weight:500}
+.faq div::after{content:"+";font-weight:700}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:14px}
+th,td{border-bottom:1px solid var(--line);padding:10px 8px;text-align:left}
+th{font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
+.tablewrap{overflow-x:auto}
+/* calc */
+.calc{background:var(--fill);border-radius:8px;padding:24px}
+.slider{height:6px;background:var(--fill2);border-radius:3px;position:relative;margin:18px 0 6px}
+.slider::after{content:"";position:absolute;left:40%;top:-7px;width:20px;height:20px;border-radius:50%;background:var(--ink)}
+.result{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.result div{background:var(--paper);border-radius:6px;padding:14px}
+.result b{display:block;font-size:22px}
+/* band + cross-sell */
+.band{background:var(--fill);border-radius:8px;padding:24px;display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.final{background:var(--ink);color:#fff}
+.final .tag{color:#aaa}.final .muted{color:#bbb}
+.final .btn{border-color:#fff;background:transparent;color:#fff}.final .btn.primary{background:var(--accent);border-color:var(--accent)}
+.sticky-cta{display:none}
+@media (max-width:900px){
+  .g2,.g3,.steps{grid-template-columns:1fr}
+  .g4{grid-template-columns:1fr 1fr}
+  .result{grid-template-columns:1fr}
+  .page{margin:0;border:0}
+  .navs{display:none}
+  .sticky-cta{display:grid;position:fixed;bottom:0;left:0;right:0;grid-template-columns:1fr 1.4fr;z-index:40;border-top:1px solid var(--line);background:var(--paper)}
+  .sticky-cta a{padding:14px;text-align:center;font-weight:600;font-size:14px}
+  .sticky-cta a.primary{background:var(--accent);color:#fff}
+  body{padding-bottom:52px}
+}
+@media (max-width:520px){ .g4,.frow{grid-template-columns:1fr} section{padding:38px 0} }
+</style>
+</head>
+<body>
+
+<div class="toggle">
+  <strong>WIREFRAME · Pagini de serviciu · v1</strong>
+  <div class="tabs" role="tablist">
+    <button role="tab" data-v="hub" aria-selected="true">Hub: Asigurări</button>
+    <button role="tab" data-v="rca" aria-selected="false">Produs: RCA</button>
+    <button role="tab" data-v="sol" aria-selected="false">Energie solară</button>
+    <button role="tab" data-v="b2b" aria-selected="false">Pentru firme</button>
+  </div>
+  <label><input type="checkbox" id="nt" checked> Notițe</label>
+</div>
+
+<!-- ============ HUB ASIGURĂRI ============ -->
+<div class="view on" id="v-hub"><div class="page">
+  <header><div class="wrap"><div class="img logo"><span>LOGO</span></div><span class="navs">Telefonie · <b>Asigurări</b> · Vacanțe · Energie solară · Pentru firme · Magazine</span><a class="btn primary sm">Cere ofertă</a></div></header>
+  <div class="wrap crumbs">Acasă › Asigurări</div>
+
+  <section class="hero"><span class="tag">01 · Hero + formular</span><div class="wrap grid g2">
+    <div>
+      <p class="eyebrow">Asigurări · prin Destine Broker</p>
+      <h1>Compari asigurări de la mai mulți asigurători, cu un consultant lângă tine</h1>
+      <p class="lead">RCA, CASCO, locuință, viață, călătorie sau pensie. Îți arătăm variantele, îți explicăm diferențele și emitem polița pe loc.</p>
+      <div class="trust"><span><b>N</b> asigurători comparați</span><span><b>Poliță</b> în aceeași zi</span><span><b>Magazin</b> în Buftea</span></div>
+    </div>
+    <div class="formbox">
+      <h3>Cere o ofertă</h3>
+      <div class="f sel">Ce vrei să asiguri?</div>
+      <div class="frow"><div class="f">Nume</div><div class="f">Telefon</div></div>
+      <div class="radio"><span class="on">Persoană fizică</span><span>Firmă</span></div>
+      <div class="gdpr">☐ Sunt de acord cu prelucrarea datelor…</div>
+      <a class="btn primary" style="width:100%;text-align:center">Vreau oferta</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Pe pagina hub, formularul e scurt: tipul de asigurare + contact. Câmpurile specifice (nr. înmatriculare etc.) apar abia pe subpagini. Formularea „prin Destine Broker” / „asistent în brokeraj” trebuie validată ASF. Formularea nu sugerează că CEMADO e broker.</div></div>
+  </section>
+
+  <section><span class="tag">02 · Tipuri de asigurări</span><div class="wrap">
+    <h2>Ce putem asigura</h2>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card"><div class="icon"></div><h3>RCA</h3><p class="muted">Obligatorie. Comparăm prețul la mai mulți asigurători.</p><span class="link">Calculează RCA →</span></div>
+      <div class="card"><div class="icon"></div><h3>CASCO</h3><p class="muted">Protecție pentru daunele propriei mașini.</p><span class="link">Vezi CASCO →</span></div>
+      <div class="card"><div class="icon"></div><h3>Locuință</h3><p class="muted">PAD obligatoriu + facultativă pentru casă și bunuri.</p><span class="link">Vezi locuință →</span></div>
+      <div class="card"><div class="icon"></div><h3>Viață și sănătate</h3><p class="muted">Protecție pentru tine și familie.</p><span class="link">Detalii →</span></div>
+      <div class="card"><div class="icon"></div><h3>Călătorie</h3><p class="muted">Medicală și storno pentru vacanță.</p><span class="link">Detalii →</span></div>
+      <div class="card"><div class="icon"></div><h3>Pensie privată</h3><p class="muted">Pilonul III, cu deducere fiscală.</p><span class="link">Detalii →</span></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">În faza 1 doar RCA și CASCO au subpagini. Celelalte carduri duc temporar la formularul hub, cu tipul preselectat. Aceleași carduri, fără refacere, primesc link real în faza 2.</div></div>
+  </section>
+
+  <section><span class="tag">03 · Cum lucrăm</span><div class="wrap">
+    <h2>Simplu, în 3 pași</h2>
+    <div class="steps">
+      <div class="step"><h3>Ne spui ce vrei să asiguri</h3><p class="muted">Online, la telefon sau în magazin.</p></div>
+      <div class="step"><h3>Comparăm ofertele</h3><p class="muted">Îți arătăm prețuri și acoperiri, una lângă alta.</p></div>
+      <div class="step"><h3>Emitem polița</h3><p class="muted">Și te ajutăm și la reînnoire sau daună.</p></div>
+    </div>
+  </div></section>
+
+  <section><span class="tag">04 · Cross-sell</span><div class="wrap">
+    <div class="band"><div><h3>Pleci în vacanță?</h3><p class="muted" style="margin:0">Rezervă prin noi și primești și asigurarea de călătorie la pachet.</p></div><a class="btn sm">Vezi vacanțele →</a></div>
+  </div>
+  <div class="wrap"><div class="note">Fiecare pagină de serviciu are o bandă de cross-sell logic: asigurări → vacanțe, energie → rate, telefonie → asigurare telefon. Avantajul „totul într-un loc” devine astfel concret.</div></div>
+  </section>
+
+  <section><span class="tag">05 · FAQ</span><div class="wrap">
+    <h2>Întrebări frecvente</h2>
+    <div class="faq"><div>Ce acte îmi trebuie pentru RCA?</div><div>Cât durează emiterea poliței?</div><div>Pot plăti asigurarea în rate?</div><div>Mă ajutați și în caz de daună?</div><div>Care e diferența dintre voi și un comparator online?</div></div>
+  </div>
+  <div class="wrap"><div class="note">FAQ-ul primește schema FAQPage. Întrebările se scriu din ce aud consultanții în magazin, nu inventate de noi. Sunt bune și pentru SEO, și pentru răspunsurile din AI search (GEO).</div></div>
+  </section>
+
+  <section class="final"><span class="tag">06 · CTA final + magazin</span><div class="wrap grid g2" style="align-items:center">
+    <div><h2>Preferi să vorbim față în față?</h2><p class="muted">Magazin CEMADO, Șos. București–Târgoviște 124, Buftea · L–V 09–19</p></div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end"><a class="btn primary">☎ 0761 691 010</a><a class="btn">Indicații rutiere</a></div>
+  </div></section>
+</div></div>
+
+<!-- ============ RCA ============ -->
+<div class="view" id="v-rca"><div class="page">
+  <header><div class="wrap"><div class="img logo"><span>LOGO</span></div><span class="navs">Telefonie · <b>Asigurări</b> · Vacanțe · Energie solară · Pentru firme · Magazine</span><a class="btn primary sm">Cere ofertă</a></div></header>
+  <div class="wrap crumbs">Acasă › Asigurări › RCA</div>
+
+  <section class="hero"><span class="tag">01 · Hero + formular RCA</span><div class="wrap grid g2">
+    <div>
+      <p class="eyebrow">Asigurare RCA · Buftea și online</p>
+      <h1>RCA la cel mai bun preț din ofertele mai multor asigurători</h1>
+      <p class="lead">Ne trimiți datele mașinii, îți trimitem variantele pe WhatsApp sau e-mail. Alegi tu, emitem polița, gata.</p>
+      <div class="chips" style="margin-top:12px"><span class="chip">Cu sau fără decontare directă</span><span class="chip">6 sau 12 luni</span><span class="chip">PF și PJ</span></div>
+      <div class="trust"><span><b>Ofertă</b> în aceeași zi</span><span><b>Rate</b> disponibile</span><span><b>Reminder</b> la expirare</span></div>
+    </div>
+    <div class="formbox">
+      <h3>Ofertă RCA</h3>
+      <div class="radio"><span class="on">Persoană fizică</span><span>Firmă</span></div>
+      <div class="frow"><div class="f sel">Tip vehicul</div><div class="f">Nr. înmatriculare</div></div>
+      <div class="frow"><div class="f">Data expirării RCA</div><div class="f sel">Perioadă (6/12 luni)</div></div>
+      <div class="f">☐ Vreau și decontare directă</div>
+      <div class="frow"><div class="f">Nume</div><div class="f">Telefon</div></div>
+      <div class="radio"><span class="on">Răspuns pe WhatsApp</span><span>Telefon</span><span>E-mail</span></div>
+      <div class="gdpr">☐ Sunt de acord cu prelucrarea datelor… ☐ Vreau reminder la expirare</div>
+      <a class="btn primary" style="width:100%;text-align:center">Primește ofertele</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="note"><b>Formular de calificare.</b> Data expirării permite prioritizarea lead-urilor urgente, iar bifa de reminder construiește o bază pentru reînnoiri (cel mai ieftin lead viitor). Opțional se poate cere și o poză după talon, cu upload. Evenimentul GA4 e <code>lead_asigurari</code> cu parametrul <code>tip=rca</code>. Pagina e și destinația campaniilor Google Ads pe „rca buftea”.</div></div>
+  </section>
+
+  <section><span class="tag">02 · Ce îți trebuie</span><div class="wrap grid g3">
+    <div class="card"><h3>Talonul mașinii</h3><p class="muted">Sau seria de șasiu și nr. de înmatriculare.</p></div>
+    <div class="card"><h3>Act de identitate</h3><p class="muted">CI proprietar sau CUI pentru firmă.</p></div>
+    <div class="card"><h3>RCA anterior (opțional)</h3><p class="muted">Pentru clasa bonus-malus.</p></div>
+  </div></section>
+
+  <section><span class="tag">03 · Explicativ (SEO)</span><div class="wrap" style="max-width:780px">
+    <h2>Ce trebuie să știi despre RCA</h2>
+    <p class="muted">Conținut scurt și util: ce acoperă RCA, ce e decontarea directă, cum funcționează bonus-malus, ce se întâmplă dacă circuli fără RCA.</p>
+    <div class="img" style="height:120px"><span>3–4 paragrafe + tabel comparativ „cu / fără decontare directă”</span></div>
+  </div>
+  <div class="wrap"><div class="note">Textul răspunde la întrebările reale de căutare. Nu afișăm prețuri fixe, pentru că se schimbă des. Spunem doar „de la X lei”, dacă clientul poate actualiza lunar.</div></div>
+  </section>
+
+  <section><span class="tag">04 · FAQ RCA</span><div class="wrap">
+    <div class="faq"><div>Pot face RCA dacă mașina e înmatriculată pe firmă?</div><div>Ce e decontarea directă și merită?</div><div>Pot plăti RCA în rate?</div><div>Ce fac dacă am avut o daună?</div></div>
+  </div></section>
+
+  <section><span class="tag">05 · Cross-sell</span><div class="wrap">
+    <div class="band"><div><h3>Ai și CASCO?</h3><p class="muted" style="margin:0">Cere ambele oferte deodată, pentru aceeași mașină.</p></div><a class="btn sm">Ofertă CASCO →</a></div>
+  </div></section>
+</div></div>
+
+<!-- ============ ENERGIE SOLARĂ ============ -->
+<div class="view" id="v-sol"><div class="page">
+  <header><div class="wrap"><div class="img logo"><span>LOGO</span></div><span class="navs">Telefonie · Asigurări · Vacanțe · <b>Energie solară</b> · Pentru firme · Magazine</span><a class="btn primary sm">Cere ofertă</a></div></header>
+  <div class="wrap crumbs">Acasă › Energie solară</div>
+
+  <section class="hero"><span class="tag">01 · Hero</span><div class="wrap grid g2" style="align-items:center">
+    <div>
+      <p class="eyebrow">Sisteme fotovoltaice · Ilfov și împrejurimi</p>
+      <h1>Panouri fotovoltaice pentru casă, fermă sau firmă, cu sprijin la finanțare</h1>
+      <p class="lead">Analizăm consumul tău, îți propunem sistemul potrivit și te ajutăm cu Casa Verde, AFIR sau plata în rate.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:18px"><a class="btn primary">Calculează economia</a><a class="btn">Vorbește cu un consultant</a></div>
+    </div>
+    <div class="img" style="height:320px"><span>FOTO: instalație reală (de la partener)</span></div>
+  </div></section>
+
+  <section><span class="tag">02 · Alege tipul (segmentare)</span><div class="wrap">
+    <h2>Pentru cine e?</h2>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card"><div class="img" style="height:120px"><span>casă</span></div><h3>Casă</h3><p class="muted">3–10 kW · invertor · aplicație de monitorizare · baterii opțional</p><span class="link">Sisteme rezidențiale →</span></div>
+      <div class="card"><div class="img" style="height:120px"><span>fermă</span></div><h3>Fermă și gospodărie</h3><p class="muted">Pompe, irigații, grajduri · sisteme hibride cu baterii</p><span class="link">Sisteme agricole →</span></div>
+      <div class="card"><div class="img" style="height:120px"><span>firmă</span></div><h3>Firmă</h3><p class="muted">De la 10 kW la sute de kW · proiectare · mentenanță</p><span class="link">Sisteme comerciale →</span></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Segmentarea pe casă / fermă / firmă vine de pe site-ul vechi. E bună, pentru că fermele din mediul rural sunt o nișă cu concurență mică online. Fiecare card duce la o subpagină cu același șablon ca hub-ul.</div></div>
+  </section>
+
+  <section><span class="tag">03 · Calculator (lead magnet)</span><div class="wrap">
+    <div class="calc">
+      <h2>Cât poți economisi?</h2>
+      <p class="muted">Estimare orientativă. Oferta exactă vine după analiza consumului.</p>
+      <div class="radio" style="margin-top:12px"><span class="on">Casă</span><span>Fermă</span><span>Firmă</span></div>
+      <p style="margin:12px 0 0;font-weight:600">Factura medie lunară: <span class="muted">≈ 400 lei</span></p>
+      <div class="slider"></div>
+      <div class="result">
+        <div><span class="muted">Sistem recomandat</span><b>≈ 5 kW</b></div>
+        <div><span class="muted">Economie anuală estimată</span><b>≈ X lei</b></div>
+        <div><span class="muted">Amortizare</span><b>≈ Y ani</b></div>
+      </div>
+      <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <div class="f" style="margin:0;min-width:180px">Telefon</div><div class="f" style="margin:0;min-width:160px">Localitate</div>
+        <a class="btn primary">Vreau oferta exactă</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note"><b>Cea mai puternică unealtă de conversie a site-ului.</b> Vizitatorul primește o valoare imediat, iar CEMADO primește un lead deja calificat (factură, tip, localitate). Formulele (producție/kWp în Ilfov, preț/kW, tarif) le validăm cu partenerul energetic. Evenimentul GA4 e <code>lead_energie</code>, plus <code>calc_used</code> pentru interacțiuni fără trimitere.</div></div>
+  </section>
+
+  <section><span class="tag">04 · Finanțare</span><div class="wrap">
+    <h2>Cum poți plăti</h2>
+    <div class="tablewrap"><table>
+      <tr><th>Variantă</th><th>Pentru cine</th><th>Ce face CEMADO</th></tr>
+      <tr><td><b>Casa Verde Fotovoltaice</b></td><td>Persoane fizice</td><td>Verificăm eligibilitatea, pregătim dosarul</td></tr>
+      <tr><td><b>AFIR</b></td><td>Fermieri, firme din rural</td><td>Consultanță pentru accesare</td></tr>
+      <tr><td><b>Rate TBI / Leasing Grenke</b></td><td>PF / PJ</td><td>Aranjăm finanțarea direct</td></tr>
+      <tr><td><b>Cash</b></td><td>Toți</td><td>Ofertă la cheie</td></tr>
+    </table></div>
+    <p style="margin-top:12px"><a class="link">Totul despre finanțare →</a></p>
+  </div>
+  <div class="wrap"><div class="note">Programele de stat se schimbă de la o sesiune la alta. Tabelul trebuie editat ușor din CMS și să aibă „actualizat la: [dată]”.</div></div>
+  </section>
+
+  <section><span class="tag">05 · Proces</span><div class="wrap">
+    <div class="steps">
+      <div class="step"><h3>Analiza consumului</h3><p class="muted">Facturi + vizită la fața locului.</p></div>
+      <div class="step"><h3>Ofertă și finanțare</h3><p class="muted">Sistem dimensionat + varianta de plată.</p></div>
+      <div class="step"><h3>Montaj și prosumator</h3><p class="muted">Instalare, racordare, suport.</p></div>
+    </div>
+  </div></section>
+
+  <section><span class="tag">06 · Dovezi</span><div class="wrap grid g3">
+    <div class="img" style="height:160px"><span>proiect realizat 1</span></div>
+    <div class="img" style="height:160px"><span>proiect realizat 2</span></div>
+    <div class="img" style="height:160px"><span>testimonial</span></div>
+  </div>
+  <div class="wrap"><div class="note">Proiectul energie e la început, așa că blocul rămâne ascuns până există proiecte reale (proprii sau ale partenerului, cu acord). Nu folosim poze stock prezentate drept proiecte.</div></div>
+  </section>
+
+  <section><span class="tag">07 · FAQ + CTA</span><div class="wrap">
+    <div class="faq"><div>Cât costă un sistem de 5 kW?</div><div>Ce înseamnă prosumator?</div><div>Am nevoie de baterii?</div><div>Cât durează de la ofertă la montaj?</div></div>
+  </div></section>
+</div></div>
+
+<!-- ============ PENTRU FIRME ============ -->
+<div class="view" id="v-b2b"><div class="page">
+  <header><div class="wrap"><div class="img logo"><span>LOGO</span></div><span class="navs">Telefonie · Asigurări · Vacanțe · Energie solară · <b>Pentru firme</b> · Magazine</span><a class="btn primary sm">Cere ofertă</a></div></header>
+  <div class="wrap crumbs">Acasă › Pentru firme</div>
+
+  <section class="hero"><span class="tag">01 · Hero</span><div class="wrap grid g2">
+    <div>
+      <p class="eyebrow">Pentru firme · IMM-uri și ferme</p>
+      <h1>Un singur partener pentru telefonia, asigurările și energia firmei tale</h1>
+      <p class="lead">Un consultant dedicat, o singură discuție, oferte pentru tot ce ai nevoie. Fără să suni la cinci furnizori.</p>
+    </div>
+    <div class="formbox">
+      <h3>Solicită o discuție</h3>
+      <div class="frow"><div class="f">Nume firmă / CUI</div><div class="f sel">Nr. angajați</div></div>
+      <p class="muted" style="font-size:13px;margin:4px 0 8px">Ce te interesează?</p>
+      <div class="radio"><span class="on">☑ Abonamente business</span><span>☐ Asigurări firmă</span><span>☐ Flotă auto</span><span class="on">☑ Fotovoltaice</span><span>☐ Telefoane în leasing</span></div>
+      <div class="frow"><div class="f">Persoană de contact</div><div class="f">Telefon</div></div>
+      <div class="gdpr">☐ Sunt de acord cu prelucrarea datelor…</div>
+      <a class="btn primary" style="width:100%;text-align:center">Trimite solicitarea</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Bife multiple: un lead B2B poate valora 3 servicii deodată. Evenimentul GA4 e <code>lead_firme</code> cu lista serviciilor. CUI-ul permite completarea automată din ANAF, dacă vrem.</div></div>
+  </section>
+
+  <section><span class="tag">02 · Servicii B2B</span><div class="wrap grid g4">
+    <div class="card"><div class="icon"></div><h3>Telefonie business</h3><p class="muted">Abonamente Vodafone, internet, telefoane pentru angajați.</p></div>
+    <div class="card"><div class="icon"></div><h3>Asigurări firmă</h3><p class="muted">Bunuri, răspundere profesională, marfă, sănătate angajați.</p></div>
+    <div class="card"><div class="icon"></div><h3>Flotă auto</h3><p class="muted">RCA și CASCO pentru toate mașinile, cu reminder centralizat.</p></div>
+    <div class="card"><div class="icon"></div><h3>Energie solară</h3><p class="muted">Sisteme comerciale și agricole, leasing Grenke.</p></div>
+  </div></section>
+
+  <section><span class="tag">03 · Argumente</span><div class="wrap grid g3">
+    <div><h3>Un consultant dedicat</h3><p class="muted">Știe toate contractele firmei tale.</p></div>
+    <div><h3>Experiență B2B din 2016</h3><p class="muted">Divizie de vânzări directe pentru persoane juridice.</p></div>
+    <div><h3>Facturare simplă</h3><p class="muted">Oferte clare, fără costuri ascunse.</p></div>
+  </div></section>
+
+  <section class="final"><span class="tag">04 · CTA</span><div class="wrap" style="text-align:center">
+    <h2>Hai să facem un audit gratuit al costurilor tale</h2>
+    <p class="muted">Ne arăți facturile actuale de telefonie, asigurări și energie și îți spunem unde poți economisi.</p>
+    <a class="btn primary">Programează auditul</a>
+  </div>
+  <div class="wrap"><div class="note" style="color:var(--noteInk)">„Audit gratuit” e o ofertă de intrare puternică pentru B2B, dar trebuie asumată operațional de CEMADO.</div></div>
+  </section>
+</div></div>
+
+<div class="sticky-cta"><a>☎ Sună</a><a class="primary">Cere ofertă</a></div>
+
+<script>
+const tabs=document.querySelectorAll('.tabs button');
+tabs.forEach(b=>b.addEventListener('click',()=>{
+  tabs.forEach(x=>x.setAttribute('aria-selected',x===b));
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('on',v.id==='v-'+b.dataset.v));
+  window.scrollTo(0,0);
+}));
+document.getElementById('nt').addEventListener('change',e=>document.body.classList.toggle('hide-notes',!e.target.checked));
+</script>
+</body>
+</html>

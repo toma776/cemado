@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CEMADO Homepage Wireframe</title>
+<style>
+:root{
+  --bg:#f4f4f2; --paper:#ffffff; --ink:#1d1d1b; --mute:#6b6b66; --line:#c9c9c4; --fill:#e4e4e0; --fill2:#d6d6d1;
+  --accent:#c8102e; --note:#fff6c9; --noteInk:#5a4a00;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.toggle{position:sticky;top:0;z-index:50;background:#1d1d1b;color:#fff;padding:8px 16px;display:flex;gap:16px;align-items:center;font-size:13px;flex-wrap:wrap}
+.toggle label{display:flex;gap:6px;align-items:center;cursor:pointer}
+body.hide-notes .note{display:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.page{background:var(--paper);max-width:1212px;margin:24px auto;border:1px solid var(--line)}
+section{padding:48px 0;border-bottom:1px dashed var(--line);position:relative}
+.tag{position:absolute;top:8px;left:16px;font:600 11px/1 ui-monospace,Consolas,monospace;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.note{background:var(--note);color:var(--noteInk);border-left:3px solid #e0b800;padding:8px 12px;font-size:13px;margin:16px 0 0;border-radius:2px}
+.img{background:var(--fill);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;color:var(--mute);font:12px ui-monospace,Consolas,monospace;text-align:center;padding:8px;position:relative;overflow:hidden}
+.img::before,.img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px))}
+.img::after{background:linear-gradient(to top left,transparent calc(50% - .5px),var(--line) 50%,transparent calc(50% + .5px))}
+.img span{position:relative;z-index:1;background:var(--fill);padding:2px 6px}
+.btn{display:inline-block;padding:12px 20px;border:2px solid var(--ink);font-weight:600;font-size:14px;border-radius:4px;background:var(--paper);color:var(--ink);text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.sm{padding:8px 14px;font-size:13px}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.15;margin:0 0 16px}
+h2{font-size:clamp(22px,2.6vw,30px);line-height:1.2;margin:0 0 8px}
+h3{font-size:18px;margin:0 0 6px}
+p{margin:0 0 12px}
+.lead{font-size:18px;color:var(--mute);max-width:56ch}
+.muted{color:var(--mute)}
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:1.1fr .9fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{border:1px solid var(--line);border-radius:6px;padding:20px;background:var(--paper);display:flex;flex-direction:column;gap:8px}
+.icon{width:40px;height:40px;border-radius:8px;background:var(--fill2)}
+.line{height:10px;background:var(--fill);border-radius:2px;margin:6px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:4px 10px;font-size:12px;color:var(--mute)}
+.link{font-weight:600;font-size:14px;margin-top:auto}
+/* topbar + header */
+.topbar{background:var(--fill);font-size:12px;color:var(--mute);padding:6px 0}
+.topbar .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header{padding:16px 0;border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:24px}
+.logo{width:150px;height:44px;flex:none}
+nav{display:flex;gap:18px;font-size:14px;font-weight:500;flex:1;flex-wrap:wrap}
+nav .ext{color:var(--mute)}
+.hdr-cta{display:flex;gap:12px;align-items:center;flex:none}
+.burger{display:none;width:36px;height:28px;border:2px solid var(--ink);border-radius:4px}
+/* hero */
+.hero .g2{align-items:center}
+.hero .img{height:380px}
+.trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:20px;font-size:13px;color:var(--mute)}
+.trust b{color:var(--ink)}
+/* why */
+.stat{font-size:32px;font-weight:700}
+/* b2b band */
+.band{background:var(--fill);border-radius:8px;padding:28px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+/* store */
+.store .img{height:300px}
+.hours{display:grid;grid-template-columns:auto 1fr;gap:4px 16px;font-size:14px;margin:12px 0}
+/* partners */
+.logos{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.logos .img{height:56px}
+/* promo */
+.promo{border:2px dashed var(--accent);border-radius:8px;padding:24px;display:grid;grid-template-columns:200px 1fr auto;gap:24px;align-items:center}
+.promo .img{height:120px}
+/* final cta */
+.final{background:var(--ink);color:#fff;text-align:center}
+.final .tag{color:#aaa}
+.final .lead{color:#ccc;margin:0 auto 20px}
+.final .btn{border-color:#fff;background:transparent;color:#fff}
+.final .btn.primary{background:var(--accent);border-color:var(--accent)}
+.form-mini{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.field{background:#333;border:1px solid #555;border-radius:4px;padding:12px 14px;min-width:180px;color:#999;font-size:13px;text-align:left}
+footer{padding:40px 0;font-size:13px;color:var(--mute)}
+footer h4{color:var(--ink);font-size:13px;margin:0 0 8px;text-transform:uppercase;letter-spacing:.04em}
+footer .g4 div p{margin:0 0 4px}
+.legal{border-top:1px solid var(--line);margin-top:24px;padding-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+/* mobile sticky bar */
+.mbar{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--paper);border-top:1px solid var(--line);z-index:40;grid-template-columns:1fr 1fr 1.4fr}
+.mbar a{padding:14px 8px;text-align:center;font-weight:600;font-size:14px;color:var(--ink);text-decoration:none;border-right:1px solid var(--line)}
+.mbar a.primary{background:var(--accent);color:#fff;border:0}
+@media (max-width:1100px){
+  nav,.hdr-cta .phone{display:none}
+  .burger{display:block}
+  header .wrap{justify-content:space-between}
+}
+@media (max-width:900px){
+  .hdr-cta .btn{display:none}
+  .g2,.g3{grid-template-columns:1fr}
+  .g4{grid-template-columns:1fr 1fr}
+  .logos{grid-template-columns:repeat(3,1fr)}
+  .promo{grid-template-columns:1fr}
+  .hero .img{height:200px}
+  .mbar{display:grid}
+  body{padding-bottom:52px}
+  .page{margin:0;border:0}
+}
+@media (max-width:520px){
+  .g4{grid-template-columns:1fr}
+  section{padding:40px 0}
+}
+</style>
+</head>
+<body>
+
+<div class="toggle">
+  <strong>WIREFRAME · cemado.ro / Acasă · v1</strong>
+  <label><input type="checkbox" id="nt" checked> Arată notițele</label>
+  <span class="muted" style="color:#aaa">Galben = explicații pentru echipă / client. Roșu = singura culoare de acțiune.</span>
+</div>
+
+<div class="page">
+
+  <!-- TOPBAR -->
+  <div class="topbar"><div class="wrap">
+    <span>Magazin Buftea · Șos. București–Târgoviște 124 · Deschis azi 09–19</span>
+    <span>☎ 0761 691 010 · WhatsApp · contact@cemado.ro</span>
+  </div></div>
+
+  <!-- HEADER -->
+  <header><div class="wrap">
+    <div class="img logo"><span>LOGO CEMADO</span></div>
+    <nav>
+      <span>Telefonie ▾</span><span>Asigurări ▾</span><span>Vacanțe</span><span>Energie solară ▾</span>
+      <span>Pentru firme</span><span>Magazine</span><span>Despre</span><span class="ext">magtel.ro ↗</span>
+    </nav>
+    <div class="hdr-cta">
+      <span class="phone" style="font-weight:600">☎ 0761 691 010</span>
+      <a class="btn primary sm">Cere ofertă</a>
+      <div class="burger"></div>
+    </div>
+  </div></header>
+  <div class="wrap"><div class="note"><b>Header fix (sticky).</b> „Cere ofertă” deschide /cere-oferta/ cu serviciul preselectat dacă vizitatorul vine de pe o pagină de serviciu. Telefonul e click-to-call și are eveniment GA4 <code>click_telefon</code>. Pe mobil meniul trece în burger și apare bara de jos (Sună / WhatsApp / Cere ofertă).</div></div>
+
+  <!-- 1 HERO -->
+  <section class="hero"><span class="tag">01 · Hero</span><div class="wrap grid g2">
+    <div>
+      <p class="muted" style="font-weight:600;letter-spacing:.04em;text-transform:uppercase;font-size:12px">Buftea · Ilfov · din 2007</p>
+      <h1>Telefonie, asigurări, vacanțe și energie solară. Toate într-un singur loc.</h1>
+      <p class="lead">Compari oferte de la mai mulți furnizori, primești explicații clare și poți plăti în rate. Online sau la magazinul nostru din Buftea.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:20px">
+        <a class="btn primary">Cere o ofertă</a>
+        <a class="btn">Vino în magazin →</a>
+      </div>
+      <div class="trust"><span><b>19 ani</b> pe piață</span><span><b>Partener Vodafone</b></span><span><b>Rate</b> prin TBI, Card Avantaj, UniCredit</span></div>
+    </div>
+    <div class="img"><span>FOTO REAL: echipa în magazinul Buftea<br>(nu stock)</span></div>
+  </div>
+  <div class="wrap"><div class="note"><b>H1 spune ce face firma</b>, nu „Experiență și Adaptabilitate”. Fotografia trebuie să fie reală, cu oameni și magazinul, pentru că asta diferențiază CEMADO de un comparator online. Cifrele din rândul de încredere trebuie validate cu clientul.</div></div>
+  </section>
+
+  <!-- 2 SERVICII -->
+  <section><span class="tag">02 · Servicii (rutare)</span><div class="wrap">
+    <h2>Cu ce te putem ajuta?</h2>
+    <p class="muted">Alege domeniul și primești o ofertă personalizată.</p>
+    <div class="grid g4" style="margin-top:24px">
+      <div class="card"><div class="icon"></div><h3>Telefonie</h3><p class="muted">Abonamente Vodafone, telefoane și gadgeturi în rate, facturi și prepay.</p>
+        <div class="chips"><span class="chip">Abonamente</span><span class="chip">Telefoane în rate</span><span class="chip">Facturi</span></div><span class="link">Vezi oferte →</span></div>
+      <div class="card"><div class="icon"></div><h3>Asigurări</h3><p class="muted">RCA, CASCO, locuință, viață, călătorie. Compari mai mulți asigurători.</p>
+        <div class="chips"><span class="chip">RCA</span><span class="chip">CASCO</span><span class="chip">Locuință</span></div><span class="link">Cere ofertă RCA →</span></div>
+      <div class="card"><div class="icon"></div><h3>Vacanțe</h3><p class="muted">Sejururi, circuite, city break. Early booking și last minute.</p>
+        <div class="chips"><span class="chip">Litoral</span><span class="chip">Circuite</span><span class="chip">Last minute</span></div><span class="link">Planifică vacanța →</span></div>
+      <div class="card"><div class="icon"></div><h3>Energie solară</h3><p class="muted">Sisteme fotovoltaice pentru casă, fermă sau firmă, cu sprijin la finanțare.</p>
+        <div class="chips"><span class="chip">Casă</span><span class="chip">Fermă</span><span class="chip">Firmă</span></div><span class="link">Calculează economia →</span></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note"><b>Cel mai important bloc.</b> Fiecare card duce la pagina principală a domeniului, iar chip-urile duc direct la subpagini. CTA-ul diferă pe fiecare card în funcție de intenție (RCA e produsul cu cea mai mare frecvență). Ordinea cardurilor se poate schimba după datele din GA4.</div></div>
+  </section>
+
+  <!-- 3 DE CE -->
+  <section><span class="tag">03 · De ce CEMADO</span><div class="wrap">
+    <h2>De ce să vii la noi</h2>
+    <div class="grid g4" style="margin-top:24px">
+      <div><div class="stat">2007</div><h3>Experiență reală</h3><p class="muted">Aproape două decenii în telecom și servicii pentru clienți.</p></div>
+      <div><div class="stat">1 loc</div><h3>Totul sub același acoperiș</h3><p class="muted">Telefon, asigurare, vacanță și energie, cu același consultant.</p></div>
+      <div><div class="stat">N+</div><h3>Compari, nu ghicești</h3><p class="muted">Îți arătăm variantele mai multor furnizori, cu costuri clare.</p></div>
+      <div><div class="stat">0%*</div><h3>Plată în rate</h3><p class="muted">Finanțare prin partenerii noștri, în condițiile fiecăruia.</p></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Toate cifrele sunt placeholder: „N+” = numărul de asigurători sau furnizori, „0%*” = doar dacă există ofertă reală, cu notă de subsol. Nicio afirmație fără acoperire, pentru conformitate ANPC și ASF.</div></div>
+  </section>
+
+  <!-- 4 FIRME -->
+  <section><span class="tag">04 · Pentru firme</span><div class="wrap">
+    <div class="band">
+      <div style="max-width:640px">
+        <h2>Ai o firmă? Avem un singur punct de contact pentru tot.</h2>
+        <p class="muted" style="margin:0">Abonamente business, asigurări pentru firmă și flotă, sisteme fotovoltaice comerciale de la 10 kW.</p>
+      </div>
+      <a class="btn">Soluții pentru firme →</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Bandă scurtă pentru vizitatorul PJ, care altfel s-ar pierde printre ofertele pentru persoane fizice. Duce la /firme/, cu formular dedicat (număr de angajați, servicii de interes).</div></div>
+  </section>
+
+  <!-- 5 MAGAZIN -->
+  <section class="store"><span class="tag">05 · Magazinul din Buftea</span><div class="wrap grid g2">
+    <div class="img"><span>HARTĂ Google Maps (embed lazy)<br>+ foto fațadă</span></div>
+    <div>
+      <h2>Vino în magazin</h2>
+      <p><b>CEMADO Buftea</b><br>Șos. București–Târgoviște nr. 124, Buftea, Ilfov</p>
+      <div class="hours"><span>Luni–Vineri</span><span>09:00 – 19:00</span><span>Sâmbătă</span><span>10:00 – 14:00</span><span>Duminică</span><span>Închis</span></div>
+      <p class="muted">Servicii rapide în magazin:</p>
+      <div class="chips" style="margin-bottom:20px"><span class="chip">Plată facturi utilități</span><span class="chip">Reîncărcare toți operatorii</span><span class="chip">Coletărie</span><span class="chip">Accesorii și configurare telefon</span></div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn primary sm">Indicații rutiere</a><a class="btn sm">☎ 0761 691 010</a></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Programul e placeholder și trebuie să fie identic cu cel din Google Business Profile. Dacă se confirmă magazinul din Otopeni, blocul devine un tab sau un slider cu 2 locații, iar linkul duce la /magazine/. Schema LocalBusiness / Store se pune pe pagina de locație.</div></div>
+  </section>
+
+  <!-- 6 PROMO (modular) -->
+  <section><span class="tag">06 · Promoție (modul opțional)</span><div class="wrap">
+    <div class="promo">
+      <div class="img"><span>vizual campanie</span></div>
+      <div><p class="muted" style="margin:0 0 4px;font-size:12px;text-transform:uppercase;letter-spacing:.04em">Valabil până la 30.11</p>
+        <h3>Black Friday la CEMADO Buftea</h3><p class="muted" style="margin:0">Oferte la telefoane și accesorii, rate prin partenerii financiari.</p></div>
+      <a class="btn sm">Vezi oferta</a>
+    </div>
+  </div>
+  <div class="wrap"><div class="note"><b>Bloc on / off din CMS, cu dată de expirare.</b> Promoțiile sezoniere stau aici, nu în hero. Când nu e nicio campanie activă, blocul dispare.</div></div>
+  </section>
+
+  <!-- 7 PARTENERI -->
+  <section><span class="tag">07 · Parteneri</span><div class="wrap">
+    <p class="muted" style="text-align:center;margin-bottom:20px">Lucrăm cu</p>
+    <div class="logos">
+      <div class="img"><span>Vodafone</span></div><div class="img"><span>Destine</span></div><div class="img"><span>TBI Bank</span></div>
+      <div class="img"><span>Card Avantaj</span></div><div class="img"><span>UniCredit CF</span></div><div class="img"><span>Grenke</span></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="note">Logo-urile apar doar cu acordul scris al fiecărui partener. Franciza Vodafone are, de regulă, ghid de brand strict. Logo-urile se afișează monocrom, ca să nu concureze cu CTA-urile.</div></div>
+  </section>
+
+  <!-- 8 FINAL CTA -->
+  <section class="final"><span class="tag">08 · CTA final</span><div class="wrap">
+    <h2>Spune-ne de ce ai nevoie. Te sunăm noi.</h2>
+    <p class="lead">Un consultant te contactează în aceeași zi lucrătoare.</p>
+    <div class="form-mini">
+      <div class="field">Nume</div><div class="field">Telefon</div><div class="field">Serviciu ▾</div><a class="btn primary">Trimite</a>
+    </div>
+    <p style="font-size:12px;color:#999;margin-top:12px">☐ Sunt de acord cu prelucrarea datelor conform Politicii de confidențialitate.</p>
+  </div>
+  <div class="wrap"><div class="note" style="text-align:left">Formular scurt cu 3 câmpuri. Selectorul de serviciu face rutarea către persoana responsabilă și declanșează evenimentul GA4 corespunzător (<code>lead_asigurari</code> etc.). „În aceeași zi” se promite doar dacă e asumat de client.</div></div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer><div class="wrap">
+    <div class="grid g4">
+      <div><div class="img logo" style="margin-bottom:12px"><span>LOGO</span></div><p>Rezolvă, asigură, trăiește.</p><p>CEMADO TRADE INTERNATIONAL SRL<br>CUI RO21693350 · J2007008857405</p></div>
+      <div><h4>Servicii</h4><p>Telefonie</p><p>Asigurări</p><p>Vacanțe</p><p>Energie solară</p><p>Pentru firme</p><p>magtel.ro ↗</p></div>
+      <div><h4>Magazin Buftea</h4><p>Șos. București–Târgoviște 124</p><p>0761 691 010</p><p>magazin.buftea@magtel.ro</p></div>
+      <div><h4>Sediu</h4><p>Bd. Basarabia 62, Bl. 34, Sc. B, Ap. 54, București</p><p>031 419 4083 · 0724 306 100</p><p>contact@cemado.ro</p></div>
+    </div>
+    <div class="legal"><span>© 2026 CEMADO Trade International SRL</span><span>Confidențialitate · Cookies · Termeni · ANPC · SOL</span></div>
+  </div></footer>
+</div>
+
+<div class="mbar"><a>☎ Sună</a><a>WhatsApp</a><a class="primary">Cere ofertă</a></div>
+
+<script>
+document.getElementById('nt').addEventListener('change',e=>document.body.classList.toggle('hide-notes',!e.target.checked));
+</script>
+</body>
+</html>

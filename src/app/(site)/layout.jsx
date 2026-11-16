@@ -6,6 +6,7 @@ import Header from '../../site/ui/Header.jsx';
 import Footer from '../../site/ui/Footer.jsx';
 import LeadDrawer from '../../site/ui/LeadDrawer.jsx';
 import '../../site/site.css';
+import '../../site/forms.css';
 
 const inter = Inter({subsets: ['latin', 'latin-ext'], variable: '--font-inter', display: 'swap'});
 const manrope = Manrope({subsets: ['latin', 'latin-ext'], weight: ['600', '700', '800'], variable: '--font-manrope', display: 'swap'});

@@ -43,11 +43,11 @@ export const LINII = [
     intro: 'Compari oferte de la mai mulți asigurători, cu un consultant lângă tine.',
     items: [
       {label: 'RCA', desc: 'Obligatorie, cu sau fără decontare directă', href: '/asigurari/rca/'},
-      {label: 'CASCO', desc: 'Daunele propriei mașini', href: '/asigurari/casco/'},
-      {label: 'Locuință', desc: 'PAD și asigurare facultativă', href: '/asigurari/locuinta/'},
-      {label: 'Viață și sănătate', desc: 'Protecție pentru tine și familie', href: '/asigurari/viata-sanatate/'},
-      {label: 'Călătorie', desc: 'Medicală și storno', href: '/asigurari/calatorie/'},
-      {label: 'Pensie privată', desc: 'Pilonul III', href: '/asigurari/pensie-privata/'}
+      {label: 'CASCO', desc: 'Daunele propriei mașini', href: '/asigurari/#casco'},
+      {label: 'Locuință', desc: 'PAD și asigurare facultativă', href: '/asigurari/#locuinta'},
+      {label: 'Viață și sănătate', desc: 'Protecție pentru tine și familie', href: '/asigurari/#viata-sanatate'},
+      {label: 'Călătorie', desc: 'Medicală și storno', href: '/asigurari/#calatorie'},
+      {label: 'Pensie privată', desc: 'Pilonul III', href: '/asigurari/#pensie-privata'}
     ],
     actiune: {titlu: 'Îți expiră RCA-ul?', text: 'Trimite datele mașinii și primești variantele pe WhatsApp.', cta: 'Ofertă RCA', href: '/asigurari/rca/'}},
   {key: 'vacante', label: 'Vacanțe', href: '/vacante/', icon: 'vacante',

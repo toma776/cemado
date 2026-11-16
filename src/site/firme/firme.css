@@ -12,22 +12,6 @@ html { scroll-padding-top: 96px; }
 .f-call { display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; font: 800 22px var(--display); }
 .f-call small { display: block; font: 500 13px var(--text); color: var(--on-dark-muted); }
 
-.f-form { background: #fff; color: var(--ink); border-radius: 24px; padding: 32px; display: grid; gap: 14px; box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6); }
-.f-form h2 { font: 800 25px/1.15 var(--display); letter-spacing: -.015em; margin: 0; }
-.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.f-checks { border: 0; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.f-checks legend { font-size: 14px; font-weight: 600; margin-bottom: 8px; padding: 0; }
-.f-checks label { position: relative; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 8px 12px; border: 1.5px solid #D9D3CC; border-radius: 12px; font-size: 14px; font-weight: 500; line-height: 1.25; cursor: pointer; }
-.f-checks label input { position: absolute; opacity: 0; pointer-events: none; }
-.f-checks label.on { border-color: var(--ink); background: var(--sand); }
-.f-checks label:has(input:focus-visible) { outline: 2px solid var(--red); outline-offset: 2px; }
-.f-box { display: grid; place-items: center; width: 22px; height: 22px; border-radius: 6px; border: 1.5px solid #C9C2BA; color: transparent; flex: none; }
-.f-checks label.on .f-box { background: var(--red); border-color: var(--red); color: #fff; }
-.f-checks.has-err label { border-color: var(--red); }
-.f-checks .s-err { grid-column: 1 / -1; }
-.f-done { justify-items: start; }
-.f-done h3 { font: 800 22px/1.2 var(--display); margin: 0; }
-.f-done p { margin: 0; }
 
 .f-li { display: flex; gap: 8px; align-items: center; padding: 5px 0; font-size: 15px; color: var(--ink-2); }
 .f-li svg { color: var(--red); flex: none; }

@@ -1,0 +1,67 @@
+/* Paginile de serviciu (Asigurări, RCA, apoi Vacanțe, Energie…): același șablon, ca experiența să fie uniformă.
+   Hero nisip cu formularul alături, apoi secțiunile homepage-ului (home.css). */
+html { scroll-padding-top: 96px; }
+.p-hero { background: var(--sand); }
+.p-hero-in { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 500px); gap: 64px; align-items: start; padding-top: 28px; padding-bottom: 88px; }
+.p-crumbs { grid-column: 1 / -1; font-size: 13.5px; color: var(--muted); }
+.p-crumbs a { color: var(--muted); text-decoration: none; }
+.p-crumbs a:hover { color: var(--red); text-decoration: underline; }
+.p-crumbs span { margin: 0 6px; }
+.p-hero-text { padding-top: 24px; }
+.p-hero h1 { font: 800 clamp(36px, 4.6vw, 58px)/1.04 var(--display); letter-spacing: -.028em; margin: 0 0 20px; }
+.p-hero h1 em { font-style: normal; color: var(--red); }
+.p-lead { font-size: 19px; color: var(--muted); margin: 0 0 28px; max-width: 560px; }
+.p-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.p-chips span { font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+.p-trust { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 520px; }
+.p-trust li { display: flex; gap: 14px; align-items: flex-start; }
+.p-trust b { display: block; font-size: 16px; }
+.p-trust span { color: var(--muted); font-size: 14.5px; }
+.p-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 32px; padding: 16px 18px; background: #fff; border: 1px solid var(--line); border-radius: 14px; font-size: 13.5px; color: var(--muted); max-width: 560px; }
+.p-note svg { color: var(--red); flex: none; margin-top: 1px; }
+
+/* carduri de tip (asigurări, sisteme…): mai compacte decât cardurile de linie */
+.p-types { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.p-type { display: flex; flex-direction: column; gap: 10px; padding: 24px; border: 1px solid var(--line); border-radius: 20px; background: #fff; scroll-margin-top: 110px; transition: box-shadow .2s, border-color .2s; }
+.p-type:hover, .p-type:target { box-shadow: var(--shadow); border-color: transparent; }
+.p-type:target { outline: 2px solid var(--red); }
+.p-type h3 { font: 800 20px/1.2 var(--display); margin: 4px 0 0; }
+.p-type p { margin: 0; color: var(--muted); font-size: 14.5px; }
+.p-type .p-type-cta { margin-top: auto; padding-top: 8px; }
+.p-type .p-type-cta .s-btn, .p-type .p-type-cta button { width: 100%; }
+.p-type.is-main { background: var(--graphite); color: var(--on-dark); border-color: var(--graphite); }
+.p-type.is-main p { color: var(--on-dark-muted); }
+.p-type.is-main .h-ico { background: rgba(255, 255, 255, .1); color: #FF9AA0; }
+
+/* documente necesare */
+.p-docs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.p-docs > div { display: flex; gap: 16px; align-items: flex-start; padding: 24px; border: 1px solid var(--line); border-radius: 20px; }
+.p-docs h3 { font: 700 17px var(--text); margin: 0 0 4px; }
+.p-docs p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+/* text explicativ (SEO) */
+.p-split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: start; }
+.p-prose h2 { margin-bottom: 20px; }
+.p-prose h3 { font: 800 19px var(--display); margin: 28px 0 8px; }
+.p-prose p { margin: 0 0 14px; color: var(--ink-2); font-size: 16.5px; line-height: 1.65; }
+.p-prose ul { margin: 0 0 14px; padding-left: 20px; color: var(--ink-2); line-height: 1.65; }
+
+/* cross-sell */
+.p-cross { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.p-cross > div { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px 24px; background: var(--red-soft); border-radius: 22px; padding: 28px 32px; }
+.p-cross > div:nth-child(2) { background: var(--sand); }
+.p-cross h3 { font: 800 22px/1.2 var(--display); margin: 0 0 4px; }
+.p-cross p { margin: 0; color: var(--ink-2); font-size: 15px; }
+
+@media (max-width: 1140px) {
+  .p-hero-in { grid-template-columns: 1fr; gap: 36px; }
+  .p-types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .p-docs, .p-split, .p-cross { grid-template-columns: 1fr; }
+  .p-split { gap: 40px; }
+}
+@media (max-width: 640px) {
+  .p-hero-in { padding-bottom: 56px; }
+  .p-hero-text { padding-top: 8px; }
+  .p-types { grid-template-columns: 1fr; }
+  .p-cross > div { padding: 24px; }
+}

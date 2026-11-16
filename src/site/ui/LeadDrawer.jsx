@@ -4,8 +4,9 @@
 import {useEffect, useRef, useState} from 'react';
 import {SERVICII, icon} from '../menu.mjs';
 import Icon, {I} from './Icon.jsx';
+import Canal from './Canal.jsx';
 
-const EMPTY = {serviciu: null, detaliu: '', mesaj: '', nume: '', telefon: '', canal: 'telefon', acord: false, website: ''};
+const EMPTY = {serviciu: null, detaliu: '', mesaj: '', nume: '', telefon: '', email: '', canal: 'telefon', acord: false, website: ''};
 
 export default function LeadDrawer({c}) {
   const [open, setOpen] = useState(false);
@@ -66,7 +67,7 @@ export default function LeadDrawer({c}) {
         {state === 'gata' ? (
           <div className="s-drawer-body s-done">
             <span className="s-done-ico"><Icon d={I.check} size={30}/></span>
-            <p>Un consultant CEMADO te {v.canal === 'whatsapp' ? 'contactează pe WhatsApp' : 'sună'} la <b>{v.telefon}</b> cât de curând, cu variantele potrivite.</p>
+            <p>Un consultant CEMADO te {v.canal === 'whatsapp' ? 'contactează pe WhatsApp la' : v.canal === 'email' ? 'contactează pe email la' : 'sună la'} <b>{v.canal === 'email' ? v.email : v.telefon}</b> cât de curând, ca să lămurim ce date îi trebuie pentru ofertă.</p>
             <p className="s-muted">Dacă e urgent, sună-ne acum la <a href={c.telefon.href}>{c.telefon.afisat}</a> sau treci pe la magazinul din {c.magazin.oras}.</p>
             <button type="button" className="s-btn s-btn-dark" onClick={() => setOpen(false)}>Închide</button>
           </div>
@@ -103,12 +104,7 @@ export default function LeadDrawer({c}) {
               <input id="ld-tel" type="tel" inputMode="tel" autoComplete="tel" value={v.telefon} onChange={e => set('telefon', e.target.value)} placeholder="07xx xxx xxx"/>
               {errors.telefon && <span className="s-err">{errors.telefon}</span>}
             </div>
-            <fieldset className="s-choices s-inline">
-              <legend>Cum preferi să te contactăm?</legend>
-              <div>{[['telefon', 'Telefon'], ['whatsapp', 'WhatsApp']].map(([k, l]) => (
-                <label key={k} className={v.canal === k ? 'on' : ''}><input type="radio" name="canal" value={k} checked={v.canal === k} onChange={() => set('canal', k)}/>{l}</label>
-              ))}</div>
-            </fieldset>
+            <Canal id="ld" v={v} set={set} errors={errors}/>
             <div className="s-field">
               <label htmlFor="ld-mesaj">Detalii <span className="s-muted">(opțional)</span></label>
               <textarea id="ld-mesaj" rows={3} value={v.mesaj} onChange={e => set('mesaj', e.target.value)} placeholder={v.serviciu === 'asigurari' ? 'ex. nr. înmatriculare, data expirării RCA' : v.serviciu === 'energie' ? 'ex. factura medie lunară, localitatea' : 'Orice ne ajută să-ți pregătim oferta'}/>

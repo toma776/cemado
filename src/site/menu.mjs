@@ -49,7 +49,7 @@ export const LINII = [
       {label: 'Călătorie', desc: 'Medicală și storno', href: '/asigurari/#calatorie'},
       {label: 'Pensie privată', desc: 'Pilonul III', href: '/asigurari/#pensie-privata'}
     ],
-    actiune: {titlu: 'Îți expiră RCA-ul?', text: 'Trimite datele mașinii și primești variantele pe WhatsApp.', cta: 'Ofertă RCA', href: '/asigurari/rca/'}},
+    actiune: {titlu: 'Îți expiră RCA-ul?', text: 'Trimite poza talonului și primești variantele pe WhatsApp sau pe email.', cta: 'Ofertă RCA', href: '/asigurari/rca/'}},
   {key: 'vacante', label: 'Vacanțe', href: '/vacante/', icon: 'vacante',
     intro: 'Sejururi, circuite și city break-uri prin Destine Holidays, cu asistență de la rezervare până la întoarcere.',
     items: [

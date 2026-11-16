@@ -17,6 +17,7 @@ html { scroll-padding-top: 96px; }
 .p-trust li { display: flex; gap: 14px; align-items: flex-start; }
 .p-trust b { display: block; font-size: 16px; }
 .p-trust span { color: var(--muted); font-size: 14.5px; }
+.p-trust-steps .h-ico { font: 800 17px var(--display); }
 .p-note { display: flex; gap: 12px; align-items: flex-start; margin-top: 32px; padding: 16px 18px; background: #fff; border: 1px solid var(--line); border-radius: 14px; font-size: 13.5px; color: var(--muted); max-width: 560px; }
 .p-note svg { color: var(--red); flex: none; margin-top: 1px; }
 

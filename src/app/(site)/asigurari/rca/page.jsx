@@ -8,12 +8,14 @@ import RCAForm from '../../../../site/asigurari/RCAForm.jsx';
 import '../../../../site/home/home.css';
 import '../../../../site/service.css';
 
-export const metadata = {title: 'Asigurare RCA Buftea · compari oferte de la mai mulți asigurători · CEMADO', description: 'Trimite datele mașinii și primești variantele RCA de la mai mulți asigurători, pe WhatsApp sau la telefon. Persoane fizice și firme, cu sau fără decontare directă.', robots: {index: false, follow: false}};
+export const metadata = {title: 'Asigurare RCA Buftea · compari oferte de la mai mulți asigurători · CEMADO', description: 'Trimite poza talonului și a buletinului și primești ofertele RCA de la mai mulți asigurători, pe WhatsApp, email sau la telefon. Persoane fizice și firme, cu sau fără decontare directă.', robots: {index: false, follow: false}};
 
 const DOC = 'M6 3h9l3 3v15H6zM14 3v4h4M9 12h6M9 16h4';
 const ID = 'M3 6h18v12H3zM8.5 12.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM5.5 16a3 3 0 0 1 6 0M14 10h4M14 14h3';
 
 const FAQ = [
+  {q: 'De ce trebuie să trimit talonul și buletinul?', a: 'Pentru că prețul RCA depinde de datele tehnice ale mașinii (de pe talon) și de proprietar: vârsta, domiciliul și clasa bonus-malus, pe care asigurătorii o verifică după CNP sau CUI. Din poze le preluăm corect, fără să le completezi de mână.'},
+  {q: 'Ce faceți cu actele mele?', a: 'Le folosește doar consultantul, pentru calculul ofertei și emiterea poliței. Ajung direct pe WhatsApp-ul sau emailul CEMADO; site-ul nu le stochează.'},
   {q: 'Pot face RCA pentru o mașină înmatriculată pe firmă?', a: 'Da. Alege „Firmă” în formular; pentru emitere avem nevoie de datele firmei (CUI) în loc de cele ale persoanei fizice.'},
   {q: 'Ce este decontarea directă și merită?', a: 'Cu decontare directă, dacă nu ești vinovat de accident, repari mașina prin propriul asigurător, nu prin cel al șoferului vinovat. Costă în plus față de RCA-ul simplu; îți arătăm ambele variante ca să decizi.'},
   {q: 'Ce se întâmplă dacă am avut daune?', a: 'Istoricul de daune influențează clasa bonus-malus și deci prețul. Spune-ne în formular sau la telefon, ca oferta să fie corectă de la început.'},
@@ -29,26 +31,26 @@ export default async function RCA() {
           <nav className="p-crumbs" aria-label="Unde ești"><a href="/">Acasă</a><span>›</span><a href="/asigurari/">Asigurări</a><span>›</span>RCA</nav>
           <div className="p-hero-text">
             <p className="s-eyebrow">Asigurare RCA · Buftea și online</p>
-            <h1>RCA comparat de la mai mulți asigurători, <em>cu ofertele pe WhatsApp.</em></h1>
-            <p className="p-lead">Ne trimiți datele mașinii, iar noi îți trimitem variantele, explicate clar. Alegi tu, emitem polița și te anunțăm înainte de următoarea expirare, dacă vrei.</p>
+            <h1>RCA comparat de la mai mulți asigurători, <em>din poza talonului.</em></h1>
+            <p className="p-lead">Lași datele de bază, ne trimiți poza talonului și a buletinului, iar consultantul îți calculează ofertele mai multor asigurători. Le primești pe WhatsApp, pe email sau la telefon.</p>
             <div className="p-chips"><span>Cu sau fără decontare directă</span><span>6 sau 12 luni</span><span>Persoane fizice și firme</span></div>
-            <ul className="p-trust">
-              <li><span className="h-ico"><Icon d={I.whatsapp} size={20}/></span><span><b>Ofertele pe WhatsApp</b>Sau la telefon, cum preferi.</span></li>
-              <li><span className="h-ico"><Icon d={I.check} size={20}/></span><span><b>Fără talon acum</b>Îl cerem doar când emitem polița.</span></li>
-              <li><span className="h-ico"><Icon d={I.pin} size={20}/></span><span><b>Sau vino în magazin</b>{c.magazin.adresa}, {c.magazin.oras}.</span></li>
-            </ul>
+            <ol className="p-trust p-trust-steps">
+              <li><span className="h-ico">1</span><span><b>Completezi formularul</b>Numărul mașinii, când expiră RCA-ul, cum vrei ofertele.</span></li>
+              <li><span className="h-ico">2</span><span><b>Trimiți talonul și buletinul</b>O poză pe WhatsApp sau pe email, cu numărul cererii.</span></li>
+              <li><span className="h-ico">3</span><span><b>Primești ofertele</b>Calculate pentru mașina ta, de la mai mulți asigurători.</span></li>
+            </ol>
           </div>
-          <RCAForm telefon={c.telefon}/>
+          <RCAForm c={c}/>
         </div>
       </section>
 
       <section className="h-sec" aria-labelledby="acte-title">
         <div className="s-wrap">
-          <div className="h-head"><div><p className="s-eyebrow">Pregătește</p><h2 id="acte-title" className="h-h2">Ce îți trebuie pentru emitere</h2></div><p className="h-lead">Pentru ofertă ajung câteva date. Documentele de mai jos le cerem doar când alegi varianta.</p></div>
+          <div className="h-head"><div><p className="s-eyebrow">Pregătește</p><h2 id="acte-title" className="h-h2">De ce avem nevoie pentru o ofertă exactă</h2></div><p className="h-lead">Prețul RCA se calculează din datele mașinii și ale proprietarului. Le luăm direct din acte, ca să nu completezi zeci de câmpuri.</p></div>
           <div className="p-docs">
-            <div><span className="h-ico"><Icon d={DOC} size={22}/></span><div><h3>Talonul mașinii</h3><p>Sau seria de șasiu și numărul de înmatriculare.</p></div></div>
-            <div><span className="h-ico"><Icon d={ID} size={22}/></span><div><h3>Act de identitate</h3><p>Cartea de identitate a proprietarului sau datele firmei (CUI).</p></div></div>
-            <div><span className="h-ico"><Icon d={I.check} size={22}/></span><div><h3>RCA-ul anterior</h3><p>Opțional, ca să știm clasa bonus-malus.</p></div></div>
+            <div><span className="h-ico"><Icon d={DOC} size={22}/></span><div><h3>Talonul mașinii</h3><p>De aici luăm seria de șasiu, marca, capacitatea, puterea și masa vehiculului.</p></div></div>
+            <div><span className="h-ico"><Icon d={ID} size={22}/></span><div><h3>Buletinul proprietarului</h3><p>Sau certificatul firmei (CUI). Din el reiese vârsta, domiciliul și clasa bonus-malus.</p></div></div>
+            <div><span className="h-ico"><Icon d={I.check} size={22}/></span><div><h3>Unde le trimiți</h3><p>Pe WhatsApp sau pe email, cu numărul cererii. Site-ul nu stochează actele tale.</p></div></div>
           </div>
         </div>
       </section>
@@ -57,7 +59,7 @@ export default async function RCA() {
         <div className="s-wrap">
           <div className="h-head"><div><p className="s-eyebrow">Cum funcționează</p><h2 id="cum-title" className="h-h2">Trei pași până la poliță</h2></div></div>
           <div className="h-steps" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 260px), 1fr))'}}>
-            <div className="h-step"><span className="h-step-n">01</span><h3>Ne trimiți datele</h3><p>Prin formular, la telefon sau direct în magazinul din {c.magazin.oras}.</p></div>
+            <div className="h-step"><span className="h-step-n">01</span><h3>Ne trimiți actele</h3><p>Poza talonului și a buletinului, pe WhatsApp, pe email sau direct în magazinul din {c.magazin.oras}.</p></div>
             <div className="h-step"><span className="h-step-n">02</span><h3>Primești variantele</h3><p>Prețurile mai multor asigurători, una lângă alta, cu și fără decontare directă.</p></div>
             <div className="h-step"><span className="h-step-n">03</span><h3>Alegi, emitem polița</h3><p>Îți explicăm pașii și rămânem alături pe toată durata poliței.</p></div>
           </div>

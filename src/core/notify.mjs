@@ -7,7 +7,7 @@
 //   LEAD_EMAIL_FROM     – expeditorul, pe un domeniu verificat în Resend (ex. „Site CEMADO <site@cemado.ro>”)
 //   SITE_URL            – adresa site-ului, pentru linkul spre panou (ex. https://cemado.ro)
 import {SERVICII} from '../site/menu.mjs';
-import {STATUSURI} from './leads.mjs';
+import {STATUSURI, CANALE} from './leads.mjs';
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
 const digits = s => String(s ?? '').replace(/\D/g, '');
@@ -25,7 +25,8 @@ export function compose(lead, siteUrl = process.env.SITE_URL || 'http://localhos
     ['Serviciu', [serv, lead.detaliu].filter(Boolean).join(' · ')],
     ['Nume', lead.nume],
     ['Telefon', lead.telefon],
-    ['Preferă', lead.canal === 'whatsapp' ? 'WhatsApp' : 'Telefon'],
+    ['Email', lead.email],
+    ['Preferă', CANALE[lead.canal] ?? lead.canal],
     ['Detalii', lead.mesaj],
     ['De unde', [lead.sursa, lead.pagina].filter(Boolean).join(' · ')],
     ['Primită', new Date(lead.created_at).toLocaleString('ro-RO', {timeZone: 'Europe/Bucharest'})]
@@ -38,7 +39,7 @@ export function compose(lead, siteUrl = process.env.SITE_URL || 'http://localhos
       <table cellpadding="7" style="border-collapse:collapse;width:100%;margin-bottom:18px">${rows.map(([k, v]) =>
         `<tr><td style="color:#5F5852;vertical-align:top;white-space:nowrap;border-bottom:1px solid #ECE7E1">${esc(k)}</td><td style="white-space:pre-line;border-bottom:1px solid #ECE7E1">${esc(v)}</td></tr>`).join('')}
       </table>
-      ${btn(`tel:${digits(lead.telefon)}`, 'Sună acum', '#B5060E')}${btn(`https://wa.me/${intl(lead.telefon)}`, 'WhatsApp', '#1F8F4E')}${btn(panou, 'Deschide în panou', '#161616')}
+      ${btn(`tel:${digits(lead.telefon)}`, 'Sună acum', '#B5060E')}${btn(`https://wa.me/${intl(lead.telefon)}`, 'WhatsApp', '#1F8F4E')}${lead.email ? btn(`mailto:${lead.email}`, 'Răspunde pe email', '#3D3935') : ''}${btn(panou, 'Deschide în panou', '#161616')}
       <p style="color:#5F5852;font-size:12.5px;margin-top:18px">Etapa cererii se ține în panou (${STATUSURI.map(s => s.label).join(' → ')}). Clientul și-a dat acordul să fie contactat pentru această cerere.</p>
     </div>`;
   const text = `${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\nPanou: ${panou}`;
@@ -56,7 +57,8 @@ export async function notify(lead) {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {Authorization: `Bearer ${key}`, 'Content-Type': 'application/json'},
-      body: JSON.stringify({from: process.env.LEAD_EMAIL_FROM || 'Site CEMADO <onboarding@resend.dev>', to, subject, html, text})
+      // Răspunsul din căsuța de email merge direct la client, dacă și-a lăsat adresa
+      body: JSON.stringify({from: process.env.LEAD_EMAIL_FROM || 'Site CEMADO <onboarding@resend.dev>', to, reply_to: lead.email || undefined, subject, html, text})
     });
     return r.ok ? {ok: true} : {error: `Resend ${r.status}: ${(await r.text()).slice(0, 300)}`};
   } catch (e) {

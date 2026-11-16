@@ -24,11 +24,11 @@ export default async function Cereri({searchParams}) {
       </div>
       <div className="rows">
         {rows.map(l => (
-          <a key={l.id} className="row" href={`/manage/cereri/${l.id}/`} data-search={`${l.nume} ${l.telefon} ${serv(l.serviciu)} ${l.detaliu ?? ''} ${l.mesaj ?? ''}`}>
+          <a key={l.id} className="row" href={`/manage/cereri/${l.id}/`} data-search={`${l.nume} ${l.telefon} ${l.email ?? ''}${serv(l.serviciu)} ${l.detaliu ?? ''} ${l.mesaj ?? ''}`}>
             <span className="av">{l.nume.split(/\s+/).map(x => x[0]).slice(0, 2).join('').toUpperCase()}</span>
             <div style={{minWidth: 0}}>
               <h3>{l.nume} <span className="muted small" style={{fontWeight: 400}}>· {l.telefon}</span></h3>
-              <div className="meta">{[serv(l.serviciu), l.detaliu, l.canal === 'whatsapp' ? 'preferă WhatsApp' : null, when(l.created_at), l.sursa].filter(Boolean).join(' · ')}</div>
+              <div className="meta">{[serv(l.serviciu), l.detaliu, l.canal !== 'telefon' ? `preferă ${l.canal === 'email' ? 'email' : 'WhatsApp'}` : null, when(l.created_at), l.sursa].filter(Boolean).join(' · ')}</div>
             </div>
             <div className="acts">
               {l.notificare_eroare && <span className="tag bad" title={l.notificare_eroare}>email eșuat</span>}

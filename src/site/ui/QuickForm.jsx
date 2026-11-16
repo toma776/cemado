@@ -5,9 +5,10 @@
 import {useState} from 'react';
 import {sendLead} from './sendLead.mjs';
 import Icon, {I} from './Icon.jsx';
+import Canal from './Canal.jsx';
 
 export default function QuickForm({serviciu, titlu, intro, intrebare, optiuni, nota, telefon, sursa = 'formular-pagina', initial = ''}) {
-  const [v, setV] = useState({detaliu: initial, nume: '', telefon: '', canal: 'telefon', mesaj: '', acord: false, website: ''});
+  const [v, setV] = useState({detaliu: initial, nume: '', telefon: '', email: '', canal: 'telefon', mesaj: '', acord: false, website: ''});
   const [errors, setErrors] = useState({});
   const [state, setState] = useState('form');
   const [msg, setMsg] = useState('');
@@ -24,7 +25,7 @@ export default function QuickForm({serviciu, titlu, intro, intrebare, optiuni, n
     <div className="f-form f-light f-done" role="status">
       <span className="s-done-ico"><Icon d={I.check} size={30}/></span>
       <h3>Mulțumim, {v.nume.split(' ')[0]}! Te contactăm noi.</h3>
-      <p>Un consultant CEMADO te {v.canal === 'whatsapp' ? 'contactează pe WhatsApp' : 'sună'} la {v.telefon} cu variantele potrivite{v.detaliu ? ` pentru ${v.detaliu.toLowerCase()}` : ''}.</p>
+      <p>Un consultant CEMADO te {v.canal === 'whatsapp' ? `contactează pe WhatsApp, la ${v.telefon}` : v.canal === 'email' ? `contactează pe email, la ${v.email}` : `sună la ${v.telefon}`}, ca să lămurim ce date îi trebuie și să-ți pregătească variantele{v.detaliu ? ` pentru ${/^[A-Z]+$/.test(v.detaliu) ? v.detaliu : v.detaliu.toLowerCase()}` : ''}.</p>
       <p className="s-muted s-small">Urgent? Sună-ne la <a href={telefon.href}>{telefon.afisat}</a>.</p>
     </div>
   );
@@ -51,12 +52,7 @@ export default function QuickForm({serviciu, titlu, intro, intrebare, optiuni, n
           {errors.telefon && <span className="s-err">{errors.telefon}</span>}
         </div>
       </div>
-      <fieldset className="s-choices s-inline">
-        <legend>Unde vrei să primești variantele?</legend>
-        <div>{[['telefon', 'Telefon'], ['whatsapp', 'WhatsApp']].map(([k, l]) => (
-          <label key={k} className={v.canal === k ? 'on' : ''}><input type="radio" name={`qf-${serviciu}-c`} value={k} checked={v.canal === k} onChange={() => set('canal', k)}/>{l}</label>
-        ))}</div>
-      </fieldset>
+      <Canal id={`qf-${serviciu}`} v={v} set={set} errors={errors} legend="Unde vrei să primești variantele?"/>
       <input className="s-hp" tabIndex={-1} autoComplete="off" aria-hidden="true" value={v.website} onChange={e => set('website', e.target.value)} name="website"/>
       <label className={`s-consent ${errors.acord ? 'has-err' : ''}`}>
         <input type="checkbox" checked={v.acord} onChange={e => set('acord', e.target.checked)}/>

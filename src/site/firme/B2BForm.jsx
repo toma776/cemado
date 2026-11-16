@@ -4,12 +4,13 @@
 // ca să apară întregi în panou și în email fără să schimbăm schema bazei.
 import {useState} from 'react';
 import Icon, {I} from '../ui/Icon.jsx';
+import {CANALE} from '../ui/Canal.jsx';
 
 export const SERVICII_B2B = ['Abonamente și internet business', 'Asigurări pentru firmă', 'Flotă auto (RCA, CASCO)', 'Sisteme fotovoltaice'];
 const MARIME = ['1–9 angajați', '10–49 angajați', '50–249 angajați', '250+ angajați'];
 
 export default function B2BForm({telefon}) {
-  const [v, setV] = useState({firma: '', cui: '', marime: '', servicii: [], nume: '', telefon: '', email: '', mesaj: '', acord: false, website: ''});
+  const [v, setV] = useState({firma: '', cui: '', marime: '', servicii: [], nume: '', telefon: '', email: '', canal: 'telefon', mesaj: '', acord: false, website: ''});
   const [errors, setErrors] = useState({});
   const [state, setState] = useState('form');
   const [msg, setMsg] = useState('');
@@ -24,10 +25,10 @@ export default function B2BForm({telefon}) {
     if (Object.keys(local).length) { setErrors(local); setMsg(''); return; }
     setState('trimite'); setMsg('');
     const mesaj = [
-      `Firmă: ${v.firma.trim()}`, v.cui && `CUI: ${v.cui.trim()}`, v.marime && `Mărime: ${v.marime}`, v.email && `Email: ${v.email.trim()}`, v.mesaj && `\n${v.mesaj.trim()}`
+      `Firmă: ${v.firma.trim()}`, v.cui && `CUI: ${v.cui.trim()}`, v.marime && `Mărime: ${v.marime}`, v.mesaj && `\n${v.mesaj.trim()}`
     ].filter(Boolean).join('\n');
     const r = await fetch('/api/leads/', {method: 'POST', headers: {'content-type': 'application/json'},
-      body: JSON.stringify({serviciu: 'firme', detaliu: v.servicii.join(', '), mesaj, nume: v.nume, telefon: v.telefon, canal: 'telefon', acord: v.acord, website: v.website, sursa: 'formular-firme', pagina: location.pathname})}).catch(() => null);
+      body: JSON.stringify({serviciu: 'firme', detaliu: v.servicii.join(', '), mesaj, nume: v.nume, telefon: v.telefon, email: v.email, canal: v.canal, acord: v.acord, website: v.website, sursa: 'formular-firme', pagina: location.pathname})}).catch(() => null);
     const j = r ? await r.json().catch(() => ({})) : {};
     if (r?.ok) { setState('gata'); window.dataLayer?.push({event: 'lead_firme', sursa: 'formular-firme'}); }
     else { setState('form'); setErrors(j.errors ?? {}); setMsg(j.error ?? 'Nu am putut trimite cererea.'); }
@@ -37,7 +38,7 @@ export default function B2BForm({telefon}) {
     <div className="f-form f-done" role="status">
       <span className="s-done-ico"><Icon d={I.check} size={30}/></span>
       <h3>Mulțumim! Am primit cererea pentru {v.firma}.</h3>
-      <p>Un consultant CEMADO vă contactează la {v.telefon} ca să discutăm serviciile bifate și să pregătim oferta.</p>
+      <p>Un consultant CEMADO vă contactează {v.canal === 'email' ? `pe email, la ${v.email}` : v.canal === 'whatsapp' ? `pe WhatsApp, la ${v.telefon}` : `la ${v.telefon}`} ca să discutăm serviciile bifate și să pregătim oferta.</p>
       <p className="s-muted s-small">Urgent? Sunați-ne la <a href={telefon.href}>{telefon.afisat}</a>.</p>
     </div>
   );
@@ -78,7 +79,13 @@ export default function B2BForm({telefon}) {
         {field('nume', 'Persoană de contact', {autoComplete: 'name', placeholder: 'Nume și prenume'})}
         {field('telefon', 'Telefon', {type: 'tel', inputMode: 'tel', autoComplete: 'tel', placeholder: '07xx xxx xxx'})}
       </div>
-      {field('email', 'Email (opțional)', {type: 'email', autoComplete: 'email', placeholder: 'nume@firma.ro'})}
+      {field('email', v.canal === 'email' ? 'Email' : 'Email (opțional)', {type: 'email', autoComplete: 'email', placeholder: 'nume@firma.ro'})}
+      <fieldset className="s-choices s-inline">
+        <legend>Cum preferați să vă contactăm?</legend>
+        <div>{CANALE.map(([k, l]) => (
+          <label key={k} className={v.canal === k ? 'on' : ''}><input type="radio" name="b2b-canal" value={k} checked={v.canal === k} onChange={() => set('canal', k)}/>{l}</label>
+        ))}</div>
+      </fieldset>
       <input className="s-hp" tabIndex={-1} autoComplete="off" aria-hidden="true" value={v.website} onChange={e => set('website', e.target.value)} name="website"/>
       <label className={`s-consent ${errors.acord ? 'has-err' : ''}`}>
         <input type="checkbox" checked={v.acord} onChange={e => set('acord', e.target.checked)}/>

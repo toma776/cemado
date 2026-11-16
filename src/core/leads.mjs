@@ -2,6 +2,8 @@
 import {getDb, one, all} from './db.mjs';
 import {SERVICII} from '../site/menu.mjs';
 
+export const CANALE = {telefon: 'Telefon', whatsapp: 'WhatsApp', email: 'Email'};
+
 // Etapele unei cereri în panou, în ordinea firească
 export const STATUSURI = [
   {key: 'nou', label: 'Nou', tone: 'bad'},
@@ -25,13 +27,17 @@ export function validate(input) {
     mesaj: clip(input.mesaj, 1000),
     nume: clip(input.nume, 80),
     telefon: clip(input.telefon, 20),
-    canal: ['telefon', 'whatsapp'].includes(input.canal) ? input.canal : 'telefon',
+    email: clip(input.email, 120).toLowerCase(),
+    canal: ['telefon', 'whatsapp', 'email'].includes(input.canal) ? input.canal : 'telefon',
     sursa: clip(input.sursa, 40),
     pagina: clip(input.pagina, 200),
     acord: input.acord === true
   };
   if (lead.nume.length < 2) errors.nume = 'Spune-ne cum te numești.';
   if (!/^(\+?40|0)7\d{8}$|^(\+?40|0)[23]\d{8}$/.test(lead.telefon.replace(/[\s.-]/g, ''))) errors.telefon = 'Verifică numărul de telefon (ex. 0722 123 456).';
+  // Emailul e opțional, dar obligatoriu dacă clientul a ales să primească ofertele pe email
+  if (lead.canal === 'email' && !lead.email) errors.email = 'Scrie adresa de email la care vrei ofertele.';
+  else if (lead.email && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(lead.email)) errors.email = 'Verifică adresa de email.';
   if (!lead.acord) errors.acord = 'Avem nevoie de acordul tău ca să te putem contacta.';
   if (Object.keys(errors).length) throw new LeadError('Verifică câmpurile marcate.', errors);
   return lead;
@@ -42,9 +48,9 @@ const parse = r => r && {...r, note: JSON.parse(r.note || '[]'), acord: !!r.acor
 export async function add(lead) {
   const db = await getDb();
   const r = await db.execute({
-    sql: `INSERT INTO leads (serviciu, detaliu, mesaj, nume, telefon, canal, sursa, pagina, acord)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`,
-    args: [lead.serviciu, lead.detaliu, lead.mesaj, lead.nume, lead.telefon, lead.canal, lead.sursa, lead.pagina, lead.acord ? 1 : 0]
+    sql: `INSERT INTO leads (serviciu, detaliu, mesaj, nume, telefon, email, canal, sursa, pagina, acord)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`,
+    args: [lead.serviciu, lead.detaliu, lead.mesaj, lead.nume, lead.telefon, lead.email || null, lead.canal, lead.sursa, lead.pagina, lead.acord ? 1 : 0]
   });
   return parse({...r.rows[0]});
 }

@@ -5,7 +5,7 @@ export async function sendLead(payload) {
   const j = r ? await r.json().catch(() => ({})) : {};
   if (r?.ok) {
     window.dataLayer?.push({event: `lead_${payload.serviciu}`, sursa: payload.sursa, detaliu: payload.detaliu});
-    return {ok: true};
+    return {ok: true, id: j.id};
   }
   return {ok: false, errors: j.errors ?? {}, error: j.error ?? 'Nu am putut trimite cererea. Sună-ne direct și te ajutăm.'};
 }

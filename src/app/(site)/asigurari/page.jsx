@@ -51,7 +51,7 @@ export default async function Asigurari() {
             </ul>
           </div>
           <QuickForm serviciu="asigurari" sursa="formular-asigurari" telefon={c.telefon}
-            titlu="Cere o ofertă de asigurare" intro="Alege tipul și lasă-ne numărul. Primești variantele de la mai mulți asigurători."
+            titlu="Cere o ofertă de asigurare" intro="Alege tipul și lasă-ne datele de contact. Consultantul îți spune ce acte îi trebuie și îți pregătește variantele de la mai mulți asigurători."
             intrebare="Ce vrei să asiguri?" optiuni={['RCA', 'CASCO', 'Locuință', 'Viață și sănătate', 'Călătorie', 'Pensie privată', 'Firmă']}
             nota={NOTA}/>
         </div>

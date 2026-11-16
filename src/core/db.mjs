@@ -36,8 +36,13 @@ const SCHEMA = [
   'CREATE INDEX IF NOT EXISTS leads_created ON leads(created_at)'
 ];
 
+// Coloane adăugate după prima versiune a tabelului (SQLite nu are ADD COLUMN IF NOT EXISTS)
+const COLUMNS = [['email', 'TEXT']];
+
 async function prepare(client) {
   for (const sql of SCHEMA) await client.execute(sql);
+  const have = new Set((await client.execute('PRAGMA table_info(leads)')).rows.map(r => r.name));
+  for (const [name, type] of COLUMNS) if (!have.has(name)) await client.execute(`ALTER TABLE leads ADD COLUMN ${name} ${type}`);
   return client;
 }
 

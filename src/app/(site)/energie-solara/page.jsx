@@ -95,10 +95,21 @@ export default async function Energie() {
       </section>
 
       <section className="h-sec h-dark" aria-labelledby="ben-title">
-        <div className="s-wrap">
-          <div className="h-head"><div><p className="s-eyebrow">Beneficii</p><h2 id="ben-title" className="h-h2">Din energia soarelui, creștem comunități</h2></div></div>
-          <div className="h-values f-values">
-            {BENEFICII.map(([t, p]) => <div key={t}><Icon d={I.check} size={22}/><h3>{t}</h3><p>{p}</p></div>)}
+        <div className="s-wrap e-ben">
+          <div className="e-ben-head">
+            <p className="s-eyebrow">Beneficii</p>
+            <h2 id="ben-title" className="h-h2">Din energia soarelui, creștem comunități</h2>
+            <p className="h-lead">Un sistem fotovoltaic lucrează pentru tine ani la rând: pe factură, pentru casă și pentru mediu.</p>
+            <a className="s-btn s-btn-primary" href="#calculator">Calculează ce sistem îți trebuie</a>
+          </div>
+          <div className="e-ben-grid">
+            {BENEFICII.map(([t, p], i) => (
+              <div key={t}>
+                <span className="e-ben-n">{String(i + 1).padStart(2, '0')}</span>
+                <h3>{t}</h3>
+                <p>{p}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

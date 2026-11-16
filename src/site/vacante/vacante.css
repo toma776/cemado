@@ -1,0 +1,16 @@
+/* Vacanțe: contorul de persoane din formular și grila „ce include” pe fundal grafit */
+.v-step { display: grid; grid-template-columns: 50px minmax(0, 1fr) 50px; align-items: center; min-height: 50px; border: 1.5px solid #D9D3CC; border-radius: 12px; overflow: hidden; background: #fff; }
+.v-step button { height: 100%; min-height: 48px; border: 0; background: var(--sand); font: 700 20px var(--display); cursor: pointer; }
+.v-step button:hover:not(:disabled) { background: var(--red-soft); color: var(--red); }
+.v-step button:disabled { opacity: .4; cursor: default; }
+.v-step output { text-align: center; font: 800 18px var(--display); }
+
+.v-inclus { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.v-inclus > div { background: var(--graphite-2); border: 1px solid var(--line-dark); border-radius: 20px; padding: 26px; display: grid; gap: 10px; align-content: start; }
+.v-inclus .e-ben-n { font: 800 15px var(--display); color: #FF9AA0; }
+.v-inclus h3 { font: 800 21px var(--display); color: #fff; margin: 0; }
+.v-inclus p { margin: 0; color: var(--on-dark-muted); font-size: 15px; }
+
+@media (max-width: 1140px) { .v-inclus { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .v-inclus { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .f-row.v-row { grid-template-columns: 1fr 1fr; } }

@@ -53,8 +53,8 @@ export const LINII = [
   {key: 'vacante', label: 'Vacanțe', href: '/vacante/', icon: 'vacante',
     intro: 'Sejururi, circuite și city break-uri prin Destine Holidays, cu asistență de la rezervare până la întoarcere.',
     items: [
-      {label: 'Litoral și sejururi', desc: 'România, Grecia, Turcia și nu numai', href: '/vacante/#sejururi'},
-      {label: 'Circuite', desc: 'Culturale, în grup sau personalizate', href: '/vacante/#circuite'},
+      {label: 'Litoral și sejururi', desc: 'Vacanțe la mare sau la munte', href: '/vacante/#sejururi'},
+      {label: 'Circuite', desc: 'Circuite culturale, organizate cap-coadă', href: '/vacante/#circuite'},
       {label: 'City break', desc: 'Escapade scurte în Europa', href: '/vacante/#city-break'},
       {label: 'Early booking și last minute', desc: 'Ofertele momentului, comparate', href: '/vacante/#oferte'}
     ],

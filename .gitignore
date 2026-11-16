@@ -14,3 +14,7 @@ Thumbs.db
 /.next/
 next-env.d.ts
 .env*.local
+
+# Cererile din formularele site-ului contin date personale: nu se publica
+/data/leads.json
+/data/*.tmp

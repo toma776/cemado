@@ -2,12 +2,15 @@
 import {stats, todo} from '../../../manage/data.mjs';
 import {GROUPS, group, tone} from '../../../registry/groups.mjs';
 import {OBSERVATII} from '../../../manage/brand.mjs';
+import {list as leads, STATUSURI} from '../../../core/leads.mjs';
+import {SERVICII} from '../../../site/menu.mjs';
 
 export default async function Panou() {
   const s = await stats();
   const open = todo(s.open);
   const kpi = ['servicii', 'divizii', 'parteneri', 'locatii', 'finantare', 'contact'];
   const verified = s.total - s.open.length;
+  const cereri = await leads();
   return (
     <>
       <div className="head"><div><div className="crumb">manage</div><h1>Panou</h1></div></div>
@@ -17,6 +20,13 @@ export default async function Panou() {
         {kpi.map(k => <a key={k} className="kpi" href={`/manage/entitati/${k}/`}><b>{s.by[k].total}</b><span>{group(k).label.toLowerCase()}</span>{s.by[k].open ? <small>{s.by[k].open} de confirmat</small> : <small>toate verificate</small>}</a>)}
       </div>
       <div className="grid2">
+        <div className="card">
+          <h3><a href="/manage/cereri/">Ultimele cereri →</a> <span className="muted small">· {cereri.filter(l => l.status === 'nou').length} noi</span></h3>
+          {cereri.slice(0, 6).map(l => (
+            <div key={l.id} className="obs"><span className={`tag ${STATUSURI.find(x => x.key === l.status)?.tone}`}>{STATUSURI.find(x => x.key === l.status)?.label}</span><a href={`/manage/cereri/${l.id}/`}>{l.nume}</a><span className="muted small">{SERVICII.find(x => x.key === l.serviciu)?.label}</span></div>
+          ))}
+          {!cereri.length && <p className="muted">Nicio cerere încă. Apar aici imediat ce cineva completează un formular pe site.</p>}
+        </div>
         <div className="card">
           <h3><a href="/manage/de-facut/">De confirmat cu clientul →</a> <span className="muted small">· {open.length}</span></h3>
           {open.slice(0, 10).map(e => (

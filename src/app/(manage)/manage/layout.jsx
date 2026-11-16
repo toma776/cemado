@@ -1,6 +1,7 @@
 import {Inter, Manrope} from 'next/font/google';
 import {canManageRequest} from '../../../manage/guard.mjs';
 import {stats} from '../../../manage/data.mjs';
+import {counts as leadCounts} from '../../../core/leads.mjs';
 import Nav from '../../../manage/ui/Nav.jsx';
 import '../../../manage/manage.css';
 
@@ -14,7 +15,11 @@ export const metadata = {title: 'Panou de administrare · CEMADO', robots: {inde
 export default async function ManageLayout({children}) {
   const local = await canManageRequest();
   const s = local ? await stats() : null;
+  const noi = local ? ((await leadCounts().catch(() => null))?.by.nou ?? 0) : 0;
   const groups = [
+    {title: 'Site', items: [
+      {href: '/manage/cereri/', label: 'Cereri', icon: 'cereri', n: noi, warn: noi > 0}
+    ]},
     {title: 'Brain', items: [
       {href: '/manage/', label: 'Panou', icon: 'panou'},
       {href: '/manage/entitati/', label: 'Entități', icon: 'entitati', n: s?.total},
@@ -32,7 +37,7 @@ export default async function ManageLayout({children}) {
             <a className="logo" href="/manage/"><img className="logo-img" src="/brand/logo-fundal-rosu.png" alt="CEMADO"/><span><small>Brain · panou de administrare</small></span></a>
             {local && <Nav groups={groups}/>}
             <div className="side-card">
-              <div className="side-status"><i className={local ? '' : 'ro'}></i><span>{local ? 'Local · data/entitati.json' : 'Doar local, până la autentificare'}</span></div>
+              <div className="side-status"><i className={local ? '' : 'ro'}></i><span>{!local ? 'Doar local, până la autentificare' : `Local · entități în JSON · cereri în ${process.env.TURSO_DATABASE_URL ? 'Turso' : 'data/leads.db'}`}</span></div>
               <div className="side-links"><a href="/" target="_blank" rel="noopener">Site ↗</a><a href="https://cemado.ro/" target="_blank" rel="noopener">cemado.ro actual ↗</a></div>
             </div>
           </aside>

@@ -22,7 +22,7 @@ export default function LeadDrawer({c}) {
   useEffect(() => {
     const onOpen = e => {
       last.current = document.activeElement;
-      setV({...EMPTY, serviciu: e.detail?.serviciu ?? null});
+      setV({...EMPTY, serviciu: e.detail?.serviciu ?? null, detaliu: e.detail?.detaliu ?? ''});
       setSursa(e.detail?.sursa ?? '');
       setErrors({}); setMsg(''); setState('form'); setOpen(true);
     };

@@ -25,3 +25,20 @@ export async function siteData() {
     sediu: {adresa: sediu.adresa, oras: sediu.oras, telefon: sediu.telefon}
   };
 }
+
+// Datele homepage-ului: istoricul (dovada longevității), argumentele, partenerii, promoția activă.
+// Afișăm doar ce există în Brain; ce lipsește (ex. testimoniale) nu se inventează.
+export async function homeData() {
+  const {entitati} = await load();
+  const of = g => entitati.filter(e => e.grup === g);
+  // Istoricul e în ordinea din Brain (cronologică); eticheta de timp e partea din titlu dinaintea „·” (ex. „Iulie 2026”)
+  const split = e => { const [t, ...rest] = e.nume.split(' · '); return rest.length ? [t, rest.join(' · ')] : [e.an, e.nume]; };
+  return {
+    istoric: of('istoric').sort((a, b) => a.id - b.id).map(e => { const [an, titlu] = split(e); return {an, titlu, text: e.descriere?.split(/(?<=\.)\s/)[0]}; }),
+    valori: of('argumente').filter(e => e.categorie === 'Valori').map(e => ({titlu: e.nume, text: e.descriere})),
+    // Partenerii activi (fără cei istorici și fără cei încă neidentificați)
+    parteneri: of('parteneri').filter(e => e.stare !== 'lipsește' && !/istoric|încheiate/i.test(`${e.nume} ${e.subcategorie}`)).map(e => ({nume: e.nume, rol: e.categorie})),
+    promotie: of('promotii').find(e => e.activa === 'Da') ?? null,
+    servicii: of('servicii').length
+  };
+}

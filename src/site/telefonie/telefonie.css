@@ -1,0 +1,23 @@
+/* Telefonie: listele din carduri, pașii pentru rate și blocul magazinului pe fundal grafit */
+.t-list { list-style: none; margin: 4px 0 0; padding: 12px 0 0; border-top: 1px solid var(--line); display: grid; gap: 6px; }
+.t-list li { display: flex; gap: 8px; font-size: 14.5px; color: var(--ink-2); }
+.t-list svg { color: var(--red); flex: none; margin-top: 3px; }
+.p-type.is-main .t-list { border-color: var(--line-dark); }
+.p-type.is-main .t-list li { color: var(--on-dark); }
+.p-type.is-main .t-list svg { color: #FF9AA0; }
+.t-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+.t-store { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: 64px; align-items: center; }
+.t-rapide { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 36px; }
+.t-rapide > div { background: var(--graphite-2); border: 1px solid var(--line-dark); border-radius: 18px; padding: 22px; color: #FF9AA0; }
+.t-rapide h3 { font: 800 19px var(--display); color: #fff; margin: 12px 0 6px; }
+.t-rapide p { margin: 0; color: var(--on-dark-muted); font-size: 14.5px; }
+.t-store-card { background: var(--graphite-2); border: 1px solid var(--line-dark); border-radius: 24px; overflow: hidden; }
+.t-store-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 25%; }
+.t-store-card > div { padding: 26px; display: grid; gap: 10px; }
+.t-store-card h3 { font: 800 22px var(--display); color: #fff; margin: 0; }
+.t-store-card p { margin: 0; color: var(--on-dark-muted); display: flex; gap: 8px; align-items: center; }
+
+@media (max-width: 1140px) { .t-store { grid-template-columns: 1fr; gap: 40px; } }
+@media (max-width: 900px) { .t-steps { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .t-rapide { grid-template-columns: 1fr; } }

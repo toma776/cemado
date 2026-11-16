@@ -33,10 +33,10 @@ export const LINII = [
   {key: 'telefonie', label: 'Telefonie', href: '/telefonie/', icon: 'telefonie',
     intro: 'Abonamente Vodafone, telefoane și gadgeturi în rate, plus serviciile rapide din magazin.',
     items: [
-      {label: 'Abonamente și internet', desc: 'Telefonie mobilă și internet Vodafone', href: '/telefonie/abonamente/'},
-      {label: 'Telefoane în rate', desc: 'Telefoane, tablete, gadgeturi, electrocasnice', href: '/telefonie/telefoane-in-rate/'},
-      {label: 'Accesorii și configurare', desc: 'Huse, folii, încărcătoare, setare telefon', href: '/telefonie/servicii-magazin/#accesorii'},
-      {label: 'Plăți facturi și prepay', desc: 'Utilități, reîncărcare toți operatorii, colete', href: '/telefonie/servicii-magazin/'}
+      {label: 'Abonamente și internet', desc: 'Telefonie mobilă și internet Vodafone', href: '/telefonie/#abonamente'},
+      {label: 'Telefoane în rate', desc: 'Telefoane, tablete, gadgeturi, electrocasnice', href: '/telefonie/#telefoane-in-rate'},
+      {label: 'Accesorii și configurare', desc: 'Huse, folii, încărcătoare, setare telefon', href: '/telefonie/#accesorii'},
+      {label: 'Plăți facturi și prepay', desc: 'Utilități, reîncărcare toți operatorii, colete', href: '/telefonie/#servicii-magazin'}
     ],
     actiune: {titlu: 'Telefon nou în rate, doar cu buletinul', text: 'Prin TBI Bank și Card Avantaj, în condițiile fiecărui partener.', cta: 'Cere ofertă', serviciu: 'telefonie'}},
   {key: 'asigurari', label: 'Asigurări', href: '/asigurari/', icon: 'asigurari',

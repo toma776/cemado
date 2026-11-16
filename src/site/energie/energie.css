@@ -1,0 +1,48 @@
+/* Energie solară: calculatorul din hero și secțiunile specifice (segmente cu imagine, tabelul de finanțare) */
+.e-calc { gap: 16px; }
+.e-seg { display: flex; margin: 0; }
+.e-seg button { flex: 1; justify-content: center; }
+.e-input { display: grid; gap: 8px; padding: 16px; background: var(--sand); border-radius: 14px; }
+.e-input-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.e-input-head label { font-size: 14px; font-weight: 600; }
+.e-mod { border: 0; background: none; padding: 0; color: var(--red); font-size: 13.5px; font-weight: 600; cursor: pointer; text-decoration: underline; min-height: 32px; }
+.e-val { display: flex; align-items: baseline; gap: 10px; }
+.e-val input { width: 150px; min-height: 52px; padding: 8px 12px; border: 1.5px solid #D9D3CC; border-radius: 12px; background: #fff; font: 800 26px var(--display); }
+.e-val span { color: var(--muted); font-weight: 600; }
+.e-input input[type=range] { width: 100%; accent-color: var(--red); min-height: 32px; }
+.e-input small { color: var(--muted); font-size: 13px; }
+.e-result { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.e-result > div { background: var(--graphite); color: #fff; border-radius: 14px; padding: 14px 16px; }
+.e-result > div:first-child { background: var(--red); }
+.e-result b { display: block; font: 800 24px/1.1 var(--display); }
+.e-result span { font-size: 13px; color: var(--on-dark-muted); }
+.e-result > div:first-child span { color: #FBE3E3; }
+.e-lead { display: grid; gap: 14px; border-top: 1px solid var(--line); padding-top: 18px; }
+.e-lead h3 { font: 800 19px var(--display); margin: 0; }
+
+.e-segs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.e-segment { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 22px; overflow: hidden; background: #fff; scroll-margin-top: 110px; }
+.e-segment:target { outline: 2px solid var(--red); }
+.e-segment img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+.e-segment > div { display: flex; flex-direction: column; gap: 10px; padding: 24px; flex: 1; }
+.e-segment small { font-size: 12.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--red); }
+.e-segment h3 { font: 800 23px/1.15 var(--display); margin: 0; }
+.e-segment ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.e-segment li { display: flex; gap: 8px; font-size: 15px; color: var(--ink-2); }
+.e-segment li svg { color: var(--red); flex: none; margin-top: 3px; }
+.e-segment .e-tag { margin-top: auto; padding-top: 10px; font-style: italic; color: var(--muted); font-size: 14.5px; }
+
+.e-fin { width: 100%; border-collapse: collapse; background: #fff; border-radius: 18px; overflow: hidden; border: 1px solid var(--line); }
+.e-fin th, .e-fin td { text-align: left; padding: 18px 20px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.e-fin th { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); background: var(--sand); }
+.e-fin td:first-child { font-weight: 700; }
+.e-fin tr:last-child td { border-bottom: 0; }
+.e-fin-wrap { overflow-x: auto; }
+.e-fin-note { margin: 12px 0 0; font-size: 13.5px; color: var(--muted); }
+
+@media (max-width: 1140px) { .e-segs { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 640px) {
+  .e-segs { grid-template-columns: 1fr; }
+  .e-fin th, .e-fin td { padding: 14px; font-size: 14.5px; }
+  .e-fin { min-width: 560px; }
+}

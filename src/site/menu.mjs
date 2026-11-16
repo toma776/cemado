@@ -62,12 +62,12 @@ export const LINII = [
   {key: 'energie', label: 'Energie solară', href: '/energie-solara/', icon: 'energie',
     intro: 'Sisteme fotovoltaice la cheie, cu sprijin la finanțare: Casa Verde, AFIR, rate.',
     items: [
-      {label: 'Pentru casă', desc: '3–10 kW, cu baterii opțional', href: '/energie-solara/casa/'},
-      {label: 'Pentru fermă', desc: 'Pompe, irigații, grajduri', href: '/energie-solara/ferma/'},
-      {label: 'Pentru firmă', desc: 'De la 10 kW la sute de kW', href: '/energie-solara/firma/'},
-      {label: 'Finanțare', desc: 'Casa Verde, AFIR, TBI, Grenke', href: '/energie-solara/finantare/'}
+      {label: 'Pentru casă', desc: 'Panouri, invertor, baterii opțional', href: '/energie-solara/#casa'},
+      {label: 'Pentru fermă', desc: 'Pompe, irigații, grajduri', href: '/energie-solara/#ferma'},
+      {label: 'Pentru firmă', desc: 'De la 10 kW la sute de kW', href: '/energie-solara/#firma'},
+      {label: 'Finanțare', desc: 'Casa Verde, AFIR, TBI, Grenke', href: '/energie-solara/#finantare'}
     ],
-    actiune: {titlu: 'Cât poți economisi?', text: 'Calculează în 30 de secunde, pornind de la factura ta.', cta: 'Calculează economia', href: '/energie-solara/#calculator'}}
+    actiune: {titlu: 'Ce sistem îți trebuie?', text: 'Află în 30 de secunde, pornind de la consumul de pe factura ta.', cta: 'Calculează sistemul', href: '/energie-solara/#calculator'}}
 ];
 
 // Linkurile simple din header, după liniile de business

@@ -12,7 +12,9 @@ html { scroll-padding-top: 96px; }
 .p-hero h1 em { font-style: normal; color: var(--red); }
 .p-lead { font-size: 19px; color: var(--muted); margin: 0 0 28px; max-width: 560px; }
 .p-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
-.p-chips span { font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
+.p-chips a { font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 9px 16px; text-decoration: none; font-weight: 600; }
+.p-chips a:hover { border-color: var(--red); color: var(--red); }
+.p-chips span {font-size: 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 7px 14px; }
 .p-trust { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 520px; }
 .p-trust li { display: flex; gap: 14px; align-items: flex-start; }
 .p-trust b { display: block; font-size: 16px; }
